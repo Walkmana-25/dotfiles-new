@@ -1,0 +1,3 @@
+Keybindings
+Ctrl-e  Recent directory (cdf)    Ctrl-r  History search (fzf)
+Ctrl-c  Normal mode               Ctrl-f  Forward char
