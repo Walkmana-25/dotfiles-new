@@ -8,3 +8,8 @@
 .config/fish/completions
 .config/fish/fisher
 
+#codessh
+{{ if ne .chezmoi.hostname "workstation" }}
+.local/bin/codessh
+{{ end }}
+

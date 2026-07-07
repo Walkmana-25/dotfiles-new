@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# スクリプトを実行したカレントディレクトリの絶対パスを取得
+CURRENT_DIR=$(pwd)
+
+# 実行するユーザー名とポート
+USER="yuuta"
+HOST="localhost"
+PORT="22222"
+
+
+
+# VS Code Remote用のURIを構築
+VSCODE_URI="vscode-remote://ssh-remote+workstation/${CURRENT_DIR}"
+
+# SSHコマンドを実行
+echo "🚀 Connecting to ${USER}@${HOST}:${PORT}..."
+echo "Executing: /opt/homebrew/bin/code --folder-uri \"${VSCODE_URI}\""
+ssh -p "${PORT}" "${USER}@${HOST}" "/opt/homebrew/bin/code --folder-uri \"${VSCODE_URI}\""
+
+echo "✅ Command sent."
