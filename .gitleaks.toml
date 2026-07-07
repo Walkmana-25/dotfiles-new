@@ -1,0 +1,26 @@
+# =============================================================================
+# gitleaks 設定ファイル
+# =============================================================================
+# chezmoi テンプレートと 1Password 統合による偽陽性を除外しつつ、
+# デフォルトルールを有効にして credential をスキャンする。
+# =============================================================================
+
+# デフォルトルールをそのまま使用（無効化しない）
+[extend]
+useDefault = true
+
+# グローバル allowlist: chezmoi & 1Password テンプレートの偽陽性を除外
+[allowlist]
+description = "chezmoi & 1Passwordテンプレートの偽陽性を除外"
+regexes = [
+    # {{ onepasswordRead "op://vault/item/field" }} パターン
+    '''onepasswordRead\s+["']op://''',
+    # {{ onepasswordDocument "op://vault/item/field" }} パターン
+    '''onepasswordDocument\s+["']op://''',
+    # {{ onepasswordItemFields "..." }} パターン
+    '''onepasswordItemFields\s+["']''',
+    # chezmoi テンプレート変数 {{ .variable }} パターン
+    '''\{\{\s*\.[\w.]+''',
+    # 1Password URI スキーム op://vault/item/field
+    '''op://[a-zA-Z0-9/_-]+''',
+]

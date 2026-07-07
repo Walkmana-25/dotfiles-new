@@ -1,0 +1,34 @@
+#!/bin/bash
+# =============================================================================
+# pre-commit hook: gitleaks による credential スキャン
+# =============================================================================
+# commit 時にステージングされた差分をスキャンし、
+# シークレット（APIキー、パスワード等）が含まれている場合は commit をブロックする。
+#
+# 依存: gitleaks (https://github.com/gitleaks/gitleaks)
+# =============================================================================
+
+set -euo pipefail
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# gitleaks がインストールされているか確認
+if ! command -v gitleaks &>/dev/null; then
+    echo -e "${RED}⚠️  gitleaks が見つかりません。credential スキャンをスキップします。${NC}"
+    echo "   インストール: brew install gitleaks"
+    exit 0
+fi
+
+# ステージングされた差分をスキャン
+if ! gitleaks protect --staged --verbose 2>&1; then
+    echo ""
+    echo -e "${RED}❌ gitleaks: credential が検出されました。commit はブロックされました。${NC}"
+    echo -e "${RED}   検出されたシークレットを修正してから再度 commit してください。${NC}"
+    echo -e "${RED}   誤検出の場合は .gitleaks.toml に allowlist を追加してください。${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}✅ gitleaks: credential スキャン通過。commit を許可します。${NC}"
+exit 0

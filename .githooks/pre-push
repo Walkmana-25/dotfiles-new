@@ -1,0 +1,57 @@
+#!/bin/bash
+# =============================================================================
+# pre-push hook: gitleaks による credential スキャン
+# =============================================================================
+# push 時にプッシュ対象のコミットのみをスキャンし、
+# シークレット（APIキー、パスワード等）が含まれている場合は push をブロックする。
+#
+# 依存: gitleaks (https://github.com/gitleaks/gitleaks)
+# =============================================================================
+
+set -euo pipefail
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# gitleaks がインストールされているか確認
+if ! command -v gitleaks &>/dev/null; then
+    echo -e "${RED}⚠️  gitleaks が見つかりません。credential スキャンをスキップします。${NC}"
+    echo "   インストール: brew install gitleaks"
+    exit 0
+fi
+
+# stdin から ref 情報を読み取る
+# 形式: <oldrev> <newrev> <refname>
+while read -r oldrev newrev refname; do
+
+    # ブランチ削除の場合はスキップ（newrev が全ゼロ）
+    if [ "$newrev" = "0000000000000000000000000000000000000000" ]; then
+        continue
+    fi
+
+    # スキャン対象のコミット範囲を決定
+    if [ "$oldrev" = "0000000000000000000000000000000000000000" ]; then
+        # 新しいブランチ: 既存のどの ref からも到達不可能なコミットをスキャン
+        revs="--not --all $newrev"
+    else
+        # 既存ブランチの更新: oldrev..newrev の範囲をスキャン
+        revs="${oldrev}..${newrev}"
+    fi
+
+    # gitleaks protect でシークレットをスキャン
+    if ! gitleaks protect \
+        --source=. \
+        --log-opts="$revs" \
+        --verbose 2>&1; then
+        echo ""
+        echo -e "${RED}❌ gitleaks: credential が検出されました。push はブロックされました。${NC}"
+        echo -e "${RED}   検出されたシークレットを修正してから再度 push してください。${NC}"
+        echo -e "${RED}   誤検出の場合は .gitleaks.toml に allowlist を追加してください。${NC}"
+        exit 1
+    fi
+
+done
+
+echo -e "${GREEN}✅ gitleaks: credential スキャン通過。push を許可します。${NC}"
+exit 0
