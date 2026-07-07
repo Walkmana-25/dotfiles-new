@@ -1,0 +1,123 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["cc-safety-net", "context-mode"],
+  "default_agent": "orchestrator",
+  "provider": {
+    "zai-coding-plan": {
+      "options": {
+        "apiKey": "{{ onepasswordRead "op://Employee/zai-api-key/credential" }}"
+      }
+    },
+    "cursor": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Cursor",
+      "options": {
+        "baseURL": "https://litellm.rasano.dev/cursor/v1",
+        "apiKey": "{{ onepasswordRead "op://Employee/zai-api-key/credential" }}"
+      },
+      "models": {
+        "composer-2-5-fast": {
+          "name": "composer-2-5-fast",
+          "limit": {
+            "context": 1048576,
+            "output": 32768
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "composer-2-5": {
+          "name": "composer-2-5",
+          "limit": {
+            "context": 1048576,
+            "output": 32768
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        }
+      }
+    },
+    "xiaomi-token-plan": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "MiMo",
+      "options": {
+        "baseURL": "https://token-plan-sgp.xiaomimimo.com/v1",
+        "apiKey": "{{ onepasswordRead "op://Employee/asano-xiaomi/credential" }}"
+      },
+      "models": {
+        "mimo-v2.5-pro": {
+          "name": "mimo-v2.5-pro",
+          "limit": {
+            "context": 1048576,
+            "output": 131072
+          },
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
+          }
+        },
+        "mimo-v2.5": {
+          "name": "mimo-v2.5",
+          "limit": {
+            "context": 1048576,
+            "output": 131072
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        }
+      }
+    }
+  },
+  "lsp": true,
+  "mcp": {
+    "mcps": {
+      "type": "remote",
+      "url": "https://mcp.lapis-dev.work/mcp",
+      "headers": {
+        "Authorization": "Bearer {{ onepasswordRead "op://Employee/lapis-mcp-1/credential" }}"
+      },
+      "enabled": true
+    }
+  },
+  "agent": {
+    "orchestrator": {
+      "permission": {
+        "mcps_*": "deny"
+      }
+    },
+    "coder": {
+      "permission": {
+        "mcps_*": "deny"
+      }
+    },
+    "reviewer": {
+      "permission": {
+        "mcps_*": "deny"
+      }
+    },
+    "tester": {
+      "permission": {
+        "mcps_*": "deny"
+      }
+    },
+    "general": {
+      "disable": true
+    },
+    "impl-coordinator": {
+      "permission": {
+        "mcps_*": "deny"
+      }
+    }
+  },
+  "command": {
+    "commit": {
+      "description": "Stage all changes and generate a commit message based on diff summary and repo history.",
+      "template": "You are the orchestrator agent performing an automated commit workflow. Follow these steps exactly in order:\n\n1. Use the commit-diff-reader subagent to read and summarize all changes in the repository. Pass this message: \"Read all current changes in the repository and provide a structured summary.\" The summary should cover staged changes, unstaged changes, and any untracked files.\n\n2. Use the commit-message-generator subagent, passing it the diff summary from step 1. Ask it to generate a concise, conventional-commit-style commit message based on the diff summary.\n\n3. After receiving the commit message from step 2, stage all changes by running: git add -A\n\n4. Commit using a heredoc to pass the message directly without creating any temporary file. Run the following bash command (replace <message> with the actual generated commit message):\ngit commit -F - << 'COMMIT_MSG_EOF'\n<message>\nCOMMIT_MSG_EOF\nThe heredoc delimiter COMMIT_MSG_EOF must be on its own line with no leading/trailing whitespace. Do NOT create any temporary files.\n\n5. Display the result by running: git log -1 --stat\n\nReport the final commit that was made."
+    }
+  }
+}

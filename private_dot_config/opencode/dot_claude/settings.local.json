@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mcps__ask_question",
+      "mcp__mcps__read_wiki_structure",
+      "mcp__mcps__firecrawl_scrape",
+      "mcp__mcps__searxng_web_search",
+      "mcp__mcps__read_wiki_contents",
+      "mcp__mcps__firecrawl_search",
+      "Bash(env)",
+      "Bash(grep '\\\\.md$')"
+    ]
+  }
+}
