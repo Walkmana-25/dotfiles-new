@@ -1,0 +1,28 @@
+Host iniad-software-exercise
+	HostName iniad-software-exercise.local
+	ProxyJump workstation
+	User ubuntu
+
+Host workstation
+	User yuuta
+	HostName workstation-vm.taild7790b.ts.net
+	ForwardX11 yes
+	RemoteForward 22222 localhost:22
+	RequestTTY yes
+	RemoteCommand fish -i
+
+Host milky-minor
+	User yuuta
+	HostName milky-minor.taild7790b.ts.net
+	DynamicForward 1080
+
+Host x510
+	user yuuta
+	ProxyJump milky-minor
+	HostName 172.16.0.65
+	IdentityFile ~/.ssh/id_rsa
+	DynamicForward 1080
+
+Host openclaw
+	user ubuntu
+	HostName 100.103.181.100

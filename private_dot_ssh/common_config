@@ -1,0 +1,5 @@
+Match exec "uname -s | grep -q Darwin"
+	Host *
+		AddKeysToAgent yes
+		IgnoreUnknown UseKeychain
+			UseKeychain yes

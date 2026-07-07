@@ -1,0 +1,6 @@
+Include ~/.ssh/common_config
+Include ~/.ssh/hosts_config
+
+Host yuuta-x870prorswifi
+  HostName yuuta-x870prorswifi
+  User yuuta
