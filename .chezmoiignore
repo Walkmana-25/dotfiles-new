@@ -19,4 +19,5 @@
 **/node_modules/**
 **/backup-*/**
 **/context-mode/**
+**/opencode/.opencode/**
 
