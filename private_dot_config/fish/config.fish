@@ -63,3 +63,4 @@ test -f "$HOME/.cargo/env.fish" && source "$HOME/.cargo/env.fish"
 
 bind -M insert ctrl-e cdf
 bind -M default ctrl-e cdf
+load_env_files

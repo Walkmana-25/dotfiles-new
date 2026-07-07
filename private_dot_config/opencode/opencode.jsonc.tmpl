@@ -5,7 +5,7 @@
   "provider": {
     "zai-coding-plan": {
       "options": {
-        "apiKey": "{{ onepasswordRead "op://Employee/zai-api-key/credential" }}"
+        "apiKey": "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
       }
     },
     "cursor": {
@@ -13,7 +13,7 @@
       "name": "Cursor",
       "options": {
         "baseURL": "https://litellm.rasano.dev/cursor/v1",
-        "apiKey": "{{ onepasswordRead "op://Employee/zai-api-key/credential" }}"
+        "apiKey": "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
       },
       "models": {
         "composer-2-5-fast": {
@@ -45,7 +45,7 @@
       "name": "MiMo",
       "options": {
         "baseURL": "https://token-plan-sgp.xiaomimimo.com/v1",
-        "apiKey": "{{ onepasswordRead "op://Employee/asano-xiaomi/credential" }}"
+        "apiKey": "{{ onepasswordRead "op://TOKEN/asano-xiaomi/credential" }}"
       },
       "models": {
         "mimo-v2.5-pro": {
@@ -79,7 +79,7 @@
       "type": "remote",
       "url": "https://mcp.lapis-dev.work/mcp",
       "headers": {
-        "Authorization": "Bearer {{ onepasswordRead "op://Employee/lapis-mcp-1/credential" }}"
+        "Authorization": "Bearer {{ onepasswordRead "op://TOKEN/lapis-mcp-1/credential" }}"
       },
       "enabled": true
     }
