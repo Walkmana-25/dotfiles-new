@@ -1,0 +1,47 @@
+#!/bin/bash
+# hash {{ include "scripts/setup_arch.sh" | sha256sum }}
+# hash {{ include "scripts/setup_debian.sh" | sha256sum }}
+# hash {{ include "scripts/setup_mac.sh" | sha256sum }}
+
+{{- if eq .chezmoi.os "windows" -}}
+
+echo "Not Supported"
+exit
+{{- else -}}
+
+
+echo "Running Setup Script"
+cd "${CHEZMOI_SOURCE_DIR}" || exit 1
+
+# Get the OS name ("Darwin" for macOS, "Linux" for Linux)
+OS="$(uname -s)"
+
+if [ "$OS" = "Darwin" ]; then
+    echo "This is macOS."
+    # Example: brew install <package>
+    bash scripts/setup_mac.sh
+    
+elif [ "$OS" = "Linux" ]; then
+    # ">/dev/null 2>&1" silences both standard output and standard error
+    if command -v pacman >/dev/null 2>&1; then
+        echo "This is Linux (pacman found / Arch Linux family)."
+        bash scripts/arch.sh
+        
+    elif command -v apt >/dev/null 2>&1; then
+        echo "This is Linux (apt found / Debian or Ubuntu family)."
+        # Example: sudo apt-get install <package>
+        # Note: Using apt-get is generally recommended over apt for scripts
+        bash scripts/debian.sh
+        
+    else
+        echo "This is Linux, but neither pacman nor apt was found."
+        # Example: Environment using dnf, zypper, etc.
+    fi
+    
+else
+    echo "Unsupported OS environment: $OS"
+fi
+
+echo "Install Script Ended"
+
+{{- end -}}
