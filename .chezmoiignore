@@ -13,3 +13,10 @@
 .local/bin/codessh
 {{ end }}
 
+# opencode
+**/package-lock.json
+**/bun.lock
+**/node_modules/**
+**/backup-*/**
+**/context-mode/**
+
