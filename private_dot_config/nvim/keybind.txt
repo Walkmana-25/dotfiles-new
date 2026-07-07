@@ -1,0 +1,26 @@
+nvimのキーバインドメモ
+
+leader = space
+
+leader leader w: Easymotion
+
+`gcc` - Toggles the current line using linewise comment
+`gbc` - Toggles the current line using blockwise comment
+
+surr*ound_words             ysiw)           (surround_words)
+[delete ar*ound me!]        ds]             delete around me!
+'change quot*es'            cs'"            "change quotes"
+[Visual] S" -> surround with "
+
+gt : 次のタブに移動する
+gT : 前のタブに移動する
+g<Tab> : 直前にいたタブに移動する
+Ctrl-Tab : g<Tab>と同じ
+
+Ctrl-w h : 左の画面に移動 (カーソル移動と同じ) (Ctrl-w <Left>, Ctrl-w Ctrl-hでも可)
+Ctrl-w l : 右の画面に移動 (カーソル移動と同じ) (Ctrl-w <Right>, Ctrl-w Ctrl-lでも可)
+Ctrl-w j : 下の画面に移動 (カーソル移動と同じ) (Ctrl-w <Down>, Ctrl-w Ctrl-jでも可)
+Ctrl-w k : 上の画面に移動 (カーソル移動と同じ) (Ctrl-w <Up>, Ctrl-w Ctrl-kでも可)
+
+Ctrl-w s : 画面を上下に分割(Split) (Ctrl-w S, Ctrl-w Ctrl-s でも可)
+Ctrl-w v : 画面を左右に分割(Vertical split) (Ctrl-w Ctrl-vでも可)

@@ -1,0 +1,233 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](fg:#7aa2f7)\
+$os\
+[ ](fg:#7aa2f7 bg:#666666)\
+$directory\
+$git_branch\
+$git_status\
+$git_metrics\
+[](fg:#666666)\
+$fill\
+[](fg:#666666)\
+$cmd_duration\
+[ ](fg:#7aa2f7 bg:#666666)\
+$time\
+[](fg:#7aa2f7)
+$character\
+"""
+
+right_format = """
+$all\
+"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+[git_status]
+style = 'fg:#e0af68 bg:#666666'
+conflicted = '='
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕'
+up_to_date = '✓'
+untracked = '?'
+stashed = '$'
+modified = '!${count}'
+renamed = '»'
+deleted = '✘'
+format = '([\[$all_status$ahead_behind\]]($style))'
+
+[git_metrics]
+added_style = 'fg:#9ece6a bg:#666666'
+deleted_style = 'fg:#9ece6a bg:#666666'
+format = '[+$added/-$deleted]($deleted_style)'
+disabled = false
+
+[time]
+disabled = false
+style = 'fg:#666666 bg:#7aa2f7'
+format = '[ $time]($style)' # nf-pl-right_soft_divider, nf-fa-clock_o
+time_format = '%T'
+utc_time_offset = '+9'
+
+[cmd_duration]
+min_time = 1
+style = 'fg:#e0af68 bg:#666666'
+format = "[  $duration]($style)" # nf-pl-right_soft_divider, nf-mdi-clock
+
+
+[fill]
+symbol = '─'
+style = 'blue'
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[Insert ❯](green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = '[Insert ❯](red)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+vimcmd_symbol = '[Normal ❯](blue)'
+vimcmd_visual_symbol = '[Visual ❯](yellow)'
+vimcmd_replace_symbol = '[Replace ❯](purple)'
+vimcmd_replace_one_symbol = '[ReplaceOne ❯](purple)'
+
+[os]
+disabled = false
+format = "[$symbol]($style)"
+style = 'fg:#666666 bg:#7aa2f7'
+
+[directory]
+truncation_length = 6
+truncation_symbol = ' ' # nf-fa-folder_open
+truncate_to_repo = true
+home_symbol = ' ~' # nf-fa-home
+style = 'fg:#7aa2f7 bg:#666666'
+read_only = ' 󰌾 ' # nf-md-lock
+read_only_style = 'fg:#f7768e bg:#666666'
+format = '[$path]($style)[$read_only]($read_only_style)'
+
+
+[[battery.display]]
+threshold = 30
+
+[aws]
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[git_branch]
+symbol = " "
+style = 'fg:#7aa2f7 bg:#666666'
+format = '[  $symbol$branch(:$remote_branch)]($style)'
+
+[golang]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "
+disabled = false
+
+[pijul_channel]
+symbol = " "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+
+
