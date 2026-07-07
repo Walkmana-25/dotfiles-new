@@ -21,3 +21,14 @@
 **/context-mode/**
 **/opencode/.opencode/**
 
+# For Work PC
+{{- if or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta") }}
+{{- end }}
+
+# For Personal PC
+{{- if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) }}
+
+.config/opencode
+{{- end }}
+
+
