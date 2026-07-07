@@ -1,0 +1,28 @@
+"vimrc 
+"コメントは"を使うよ
+
+source $VIMRUNTIME/defaults.vim
+
+"行番号
+set number
+
+"カーソル
+set cursorline
+
+"clipboard
+set clipboard+=unnamed
+
+"cmd
+set wildmenu
+
+"normal
+imap jk <Esc>
+let g:mapleader = "\<Space>"
+"timeout
+set timeout timeoutlen=200 ttimeoutlen=50
+
+call plug#begin('~/.vim/plugged')
+
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+call plug#end()
