@@ -1,0 +1,28 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Yuta Takahashi
+	email = y.highbridge04@gmail.com
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !/usr/sbin/gh auth git-credential
+	helper = !/usr/local/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !/usr/sbin/gh auth git-credential
+	helper = !/usr/local/bin/gh auth git-credential
+[gpg]
+	format = ssh
+[commit]
+	gpgSign = true
+[gpg "ssh"]
+        defaultKeyCommand = ssh-add -L
+
+
+[core]
+	autocrlf = input
