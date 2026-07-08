@@ -12,8 +12,9 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Cursor",
       "options": {
-        "baseURL": "https://litellm.rasano.dev/cursor/v1",
-        "apiKey": "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
+        "baseURL": "{{ onepasswordRead "op://TOKEN/cursor/url" }}",
+        "apiKey": "{{ onepasswordRead "op://TOKEN/cursor/credential" }}"
+    
       },
       "models": {
         "composer-2-5-fast": {
@@ -44,8 +45,8 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "MiMo",
       "options": {
-        "baseURL": "https://token-plan-sgp.xiaomimimo.com/v1",
-        "apiKey": "{{ onepasswordRead "op://TOKEN/asano-xiaomi/credential" }}"
+        "baseURL": "{{ onepasswordRead "op://TOKEN/xiaomi/url" }}",
+        "apiKey": "{{ onepasswordRead "op://TOKEN/xiaomi/credential" }}"
       },
       "models": {
         "mimo-v2.5-pro": {
@@ -77,7 +78,7 @@
   "mcp": {
     "mcps": {
       "type": "remote",
-      "url": "https://mcp.lapis-dev.work/mcp",
+      "url": "{{ onepasswordRead "op://TOKEN/lapis-mcp-1/url" }}",
       "headers": {
         "Authorization": "Bearer {{ onepasswordRead "op://TOKEN/lapis-mcp-1/credential" }}"
       },
