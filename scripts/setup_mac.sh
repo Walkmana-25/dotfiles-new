@@ -22,6 +22,26 @@ PACKAGES=(
     wget
     tmux
     gh
+    tree
+    bat
+    btop
+    chezmoi
+    docker-buildx
+    docker-compose
+    fd
+    fish
+    fzf
+    gitleaks
+    htop
+    lazygit
+    lsd
+    neovim
+    ripgrep
+    opencode
+    starship
+    trash-cli
+    tmux
+    wget
 )
 
 for pkg in "${PACKAGES[@]}"; do
@@ -38,6 +58,20 @@ echo "Install Brew Cask Application"
 echo "--------------------------------------------------"
 
 PACKAGES_CASK=(
+    1password
+    1password-cli
+    ankerwork
+    atok
+    firefox
+    floorp
+    font-hack-nerd-font
+    google-chrome
+    karabiner-elements
+    slack
+    visual-studio-code
+    zed
+    zoom
+    maccy
 )
 
 for pkg in "${PACKAGES_CASK[@]}"; do
