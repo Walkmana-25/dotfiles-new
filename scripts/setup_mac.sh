@@ -49,7 +49,7 @@ for pkg in "${PACKAGES[@]}"; do
         echo "${pkg} is already installed."
     else
         echo "${pkg} is not installed. Installing..."
-        brew install "$pkg"
+        brew install -y "$pkg"
     fi
 done
 
@@ -79,6 +79,6 @@ for pkg in "${PACKAGES_CASK[@]}"; do
         echo "${pkg} is already installed."
     else
         echo "${pkg} is not installed. Installing..."
-        brew install --cask "$pkg"
+        brew install --cask -y "$pkg"
     fi
 done
