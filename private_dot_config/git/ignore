@@ -1,4 +1,4 @@
 .DS_Store
 
 **/.claude/settings.local.json
-**/.opencode/artifacts
+**/.opencode/artifacts/**
