@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+import subprocess
+import sys
+import os
+import platform
+
+def main():
+    if not (len(sys.argv) in [1, 2]):
+        print("Open File in default Open Tools")
+        print(f"Usage: {sys.argv[0]} path")
+        print("Path is Optional and Default is '.'.")
+    
+    kernel = platform.system()
+    open_cmd = ""
+    
+    if kernel == "Darwin":
+        open_cmd = "open"
+    elif kernel == "Linux":
+        open_cmd = "xdg-open"
+    else:
+        print("Err: Not Supported Operation System.\n This Program is supported in Linux or Mac OS", file = sys.stderr)
+        sys.exit(1)
+
+    # Test
+    test_result = subprocess.run(["which", open_cmd], stdout = subprocess.PIPE, encoding = "utf8")
+    if (test_result.returncode != 0):
+        print(f"Err: {open_cmd} is not found.", file = sys.stderr)
+        sys.exit(1)
+    
+    # Run Open
+    path = ""
+    if len(sys.argv) == 2:
+        path = sys.argv[1]
+    else:
+        path = "."
+
+    result =  subprocess.run([open_cmd, path])
+    if (result.returncode != 0):
+        print(f"Err: {open_cmd} exited with non zero exit code.")
+        sys.exit(1)
+    
+    sys.exit(0)
+
+if __name__ == "__main__":
+    main()
