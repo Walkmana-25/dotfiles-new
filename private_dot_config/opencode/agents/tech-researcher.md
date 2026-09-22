@@ -1,7 +1,6 @@
 ---
 description: Deep research into technologies, libraries, APIs, and frameworks. Provides structured reports with practical recommendations.
 mode: subagent
-model: xiaomi-token-plan/mimo-v2.5-pro
 hidden: true
 steps: 20
 permission:

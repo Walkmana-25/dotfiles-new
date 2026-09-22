@@ -1,6 +1,6 @@
 ---
 description: Reads git staged and unstaged changes, summarizes them for commit message generation.
-model: xiaomi-token-plan/mimo-v2.5
+model: xiaomi-token-plan/mimo-v2.6-flash
 mode: subagent
 hidden: true
 steps: 10
