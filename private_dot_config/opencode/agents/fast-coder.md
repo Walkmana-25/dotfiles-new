@@ -2,7 +2,7 @@
 description: Handles simple code tasks quickly. Small fixes, file creation, boilerplate, and straightforward edits. Fast coding agent for trivial changes.
 mode: subagent
 hidden: true
-model: xiaomi-token-plan/mimo-v2.5-pro
+model: xiaomi-token-plan/mimo-v2.6-flash
 steps: 15
 temperature: 0.1
 permission:

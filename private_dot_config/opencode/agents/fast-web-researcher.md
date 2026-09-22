@@ -1,6 +1,6 @@
 ---
 description: Quick web search for simple queries. Fast and cheap haiku agent for basic lookups. Use tech-researcher for deep investigation.
-model: xiaomi-token-plan/mimo-v2.5
+model: xiaomi-token-plan/mimo-v2.6-flash
 mode: subagent
 hidden: true
 permission:

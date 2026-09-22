@@ -2,7 +2,7 @@
 description: Executes bash commands and summarizes results. Sub agent for command execution.
 mode: subagent
 hidden: true
-model: xiaomi-token-plan/mimo-v2.5-pro
+model: xiaomi-token-plan/mimo-v2.6-flash
 steps: 25
 permission:
   read: deny

@@ -2,7 +2,7 @@
 description: Quickly explores and summarizes codebase structure, architecture, and key files. Use for rapid codebase overview. Fast read-only agent.
 mode: subagent
 hidden: true
-model: xiaomi-token-plan/mimo-v2.5
+model: xiaomi-token-plan/mimo-v2.6-flash
 steps: 10
 permission:
   read: allow

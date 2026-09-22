@@ -2,7 +2,7 @@
 description: Quick web lookups, fact-checking, and latest information retrieval. Fast, concise, no file access.
 mode: subagent
 hidden: true
-model: xiaomi-token-plan/mimo-v2.5
+model: xiaomi-token-plan/mimo-v2.6-flash
 steps: 8
 permission:
   read: deny
