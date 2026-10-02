@@ -1,3 +1,20 @@
+/**
+ * opencode config — v1形式で運用(v1.18.30バイナリと共に)
+ *
+ * 重要: opencode v1.18.30 は v2ネイティブキー (plugins/providers/mcp.servers/
+ * agents.permissions配列) を スキーマ上は受け入れるが機能させない
+ * (検証済み: "Omitted native setting that cannot be represented in V1",
+ *  "Provider not found", "V2 permissions are not supported by OpenCode V1")。
+ * ゆえにバイナリをv2に上げるまで、このv1形式を維持すること。
+ *
+ * v2 への移行日:
+ *   - バイナリをv2に上げたら、このファイルはそのまま動く(v2が起動時に自動マイグレーション)
+ *   - ネイティブv2形式に書き換えたい場合は同梱の移行ガイドを使用:
+ *     .opencode/research/opencode-v2-config-migration.md
+ *     .opencode/research/opencode-v2-plugin-compat.md (v2-native設定例を含む)
+ *   - task-output-guard.ts は既に v1/v2 両対応 (combined entrypoint) 済み
+ *   - @opencode/plugin (v2型) は package.json に追加済み
+ */
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": ["cc-safety-net", "context-mode"],
@@ -7,7 +24,7 @@
       "options": {
         "apiKey": "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
       }
-    },
+    }
   },
   "lsp": true,
   "mcp": {
@@ -22,24 +39,16 @@
   },
   "agent": {
     "orchestrator": {
-      "permission": {
-        "mcps_*": "deny"
-      }
+      "permission": { "mcps_*": "deny" }
     },
     "coder": {
-      "permission": {
-        "mcps_*": "deny"
-      }
+      "permission": { "mcps_*": "deny" }
     },
     "reviewer": {
-      "permission": {
-        "mcps_*": "deny"
-      }
+      "permission": { "mcps_*": "deny" }
     },
     "tester": {
-      "permission": {
-        "mcps_*": "deny"
-      }
+      "permission": { "mcps_*": "deny" }
     },
     "general": {
       "disable": true
