@@ -22,6 +22,7 @@ if test (uname -s) = 'Darwin'
     fish_add_path $HOME/.lmstudio/bin
     fish_add_path $HOME/.antigravity/antigravity/bin
     fish_add_path $HOME/.deno/bin
+    fish_add_path $HOME/.opencode/bin
 end
 
 # Linux Specific
