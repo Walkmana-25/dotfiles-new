@@ -27,6 +27,7 @@
       "material": "auto"
    },
    "favorites": [
+      "@khasbilegt/store.raycast.1password:item-list",
       "wm:switch-windows",
       "@mblode/store.raycast.google-search:index",
       "files:search",
@@ -39,6 +40,11 @@
             "open-recents": {
                "alias": "p"
             }
+         }
+      },
+      "@khasbilegt/store.raycast.1password": {
+         "preferences": {
+            "version": "v8"
          }
       },
       "@mblode/store.raycast.google-search": {
