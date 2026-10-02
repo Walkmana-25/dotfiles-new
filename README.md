@@ -28,3 +28,8 @@ commit時に [gitleaks](https://github.com/gitleaks/gitleaks) がステージン
 ### Macのsudoについて
 次のサイトを参考にすべし
 [Qiita](https://qiita.com/kawaz/items/0593163c1c5538a34f6f)
+
+### Vicineのプラグイン
+
+- https://www.vicinae.com/extensions/shyassassin/vscode-recents
+- https://www.raycast.com/mblode/google-search
