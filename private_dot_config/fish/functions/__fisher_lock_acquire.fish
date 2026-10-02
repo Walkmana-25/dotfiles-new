@@ -29,7 +29,7 @@ function __fisher_lock_acquire --description 'Atomically acquire the fisher upda
         if not mv "$lockdir" "$lockdir.stale.$fish_pid" 2>/dev/null
             return 1 # another shell took it first
         end
-        rm -rf "$lockdir.stale.$fish_pid"
+        command rm -rf "$lockdir.stale.$fish_pid"
     end
 
     # Plain mkdir acquire (atomic); lost the race -> blocked

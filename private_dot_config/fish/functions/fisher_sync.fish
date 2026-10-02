@@ -7,7 +7,7 @@ function fisher_sync
     set -l lockdir $cache_dir/fisher_sync.lock
 
     # Force bootstrap retry on the next shell start
-    rm -f $cache_dir/fisher_bootstrap.stamp
+    command rm -f $cache_dir/fisher_bootstrap.stamp
 
     # Lock first: a live update blocks us; never remove its lock and
     # do not claim the interval out from under it.
@@ -24,7 +24,7 @@ function fisher_sync
         echo "Installing Fisher..."
         __fisher_bootstrap
         if not functions -q fisher
-            rm -f "$lockdir/timestamp"
+            command rm -f "$lockdir/timestamp"
             rmdir "$lockdir" 2>/dev/null
             echo "fisher_sync: fisher is unavailable" >&2
             return 1
@@ -35,6 +35,6 @@ function fisher_sync
     fisher update
 
     # Release the lock unconditionally
-    rm -f "$lockdir/timestamp"
+    command rm -f "$lockdir/timestamp"
     rmdir "$lockdir" 2>/dev/null
 end

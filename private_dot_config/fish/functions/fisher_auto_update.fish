@@ -40,10 +40,10 @@ function fisher_auto_update
     mkdir -p $cache_dir
 
     # Remove old-generation artifacts (legacy stamp/lock names)
-    rm -rf $cache_dir/fisher_last_update
-    rm -rf $cache_dir/fisher_update.lock
-    rm -rf $cache_dir/fisher.last_update
-    rm -rf $cache_dir/fisher.update.lock
+    command rm -rf $cache_dir/fisher_last_update
+    command rm -rf $cache_dir/fisher_update.lock
+    command rm -rf $cache_dir/fisher.last_update
+    command rm -rf $cache_dir/fisher.update.lock
 
     # Lock dir to avoid concurrent updates across multiple shells.
     # __fisher_lock_acquire blocks (exit 1) while another update is
@@ -61,7 +61,7 @@ function fisher_auto_update
     # Run in background to keep shell startup fast
     begin
         fisher update
-        rm -f "$lockdir/timestamp"
+        command rm -f "$lockdir/timestamp"
         rmdir "$lockdir" 2>/dev/null
     end >/dev/null 2>&1 &
 end
