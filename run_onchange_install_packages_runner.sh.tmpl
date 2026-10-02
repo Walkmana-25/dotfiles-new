@@ -25,13 +25,13 @@ elif [ "$OS" = "Linux" ]; then
     # ">/dev/null 2>&1" silences both standard output and standard error
     if command -v pacman >/dev/null 2>&1; then
         echo "This is Linux (pacman found / Arch Linux family)."
-        bash scripts/arch.sh
+        bash scripts/setup_arch.sh
         
     elif command -v apt >/dev/null 2>&1; then
         echo "This is Linux (apt found / Debian or Ubuntu family)."
         # Example: sudo apt-get install <package>
         # Note: Using apt-get is generally recommended over apt for scripts
-        bash scripts/debian.sh
+        bash scripts/setup_debian.sh
         
     else
         echo "This is Linux, but neither pacman nor apt was found."
