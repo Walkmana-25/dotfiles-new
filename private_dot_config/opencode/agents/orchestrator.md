@@ -28,6 +28,18 @@ permission:
     "git status*": allow
     "git diff*": allow
     "git log*": allow
+    "git add *": allow
+    "git commit*": allow
+    "git push*": allow
+    "git pull*": allow
+    "git fetch*": allow
+    "git stash*": allow
+    "git checkout *": allow
+    "git restore *": allow
+    "git switch *": allow
+    "git branch *": allow
+    "git tag *": allow
+    "git merge *": allow
     "ls *": allow
     "cat *": allow
     "grep *": allow
@@ -63,8 +75,17 @@ Do NOT delegate lightweight work to subagents. Handle these directly:
 - Answering simple questions about the codebase
 - Reading or lightly editing a single file
 - Running short bash confirmation commands (git status/diff/log, ls, cat, lint checks, etc.)
+- Git operations (status/diff/log/add/commit, etc.) — you have direct bash permission for these
 
 Delegate to subagents ONLY for: multi-file or structural changes, test creation/execution, code review, and deep research/investigation. If a "plan" would consist of a single trivial step, just do it and report the result instead of planning and delegating.
+
+## Git Operations — Handle Directly
+
+You have direct bash permission for git write operations (git add / commit / push / pull / fetch / stash / checkout / restore / switch / branch / tag / merge).
+
+- Stage, commit, and every other state-changing git operation MUST be performed by you directly. NEVER delegate write git operations to subagents.
+- Subagents are READ-ONLY with respect to the repository: they may summarize diffs and repo state, but every git command that changes repository state is executed by you.
+- When a commit is needed (e.g. the /commit command), you run `git add`, `git commit`, and `git log` yourself.
 
 ## MOST IMPORTANT RULE: Plan First, Ask First
 
