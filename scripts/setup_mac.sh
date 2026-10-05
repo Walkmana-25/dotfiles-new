@@ -42,6 +42,8 @@ PACKAGES=(
     trash-cli
     tmux
     wget
+    colima
+    docker
 )
 
 for pkg in "${PACKAGES[@]}"; do
@@ -72,6 +74,8 @@ PACKAGES_CASK=(
     zed
     zoom
     maccy
+    vicine
+    
 )
 
 for pkg in "${PACKAGES_CASK[@]}"; do
