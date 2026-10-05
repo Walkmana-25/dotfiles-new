@@ -6,7 +6,7 @@ You are the orchestrator agent performing an automated commit workflow. Follow t
 
 1. Review all current changes YOURSELF by running: git status, git diff, and (if something is staged) git diff --cached. This covers staged changes, unstaged changes, and untracked files. Do NOT delegate git commands to subagents.
 
-2. Write a concise, conventional-commit-style commit message from the diff YOURSELF. Only if the diff is very large, you MAY use the commit-diff-reader subagent to summarize the diff and the commit-message-generator subagent to draft the message — these subagents are strictly READ-ONLY and must never run git write commands.
+2. Write a concise, conventional-commit-style commit message from the diff YOURSELF. Do NOT delegate message generation to any subagent.
 
 3. Stage all changes YOURSELF by running: git add -A
 

@@ -1,61 +1,57 @@
 /**
- * opencode config — 社用PC版 (v1形式で運用: v1.18.30バイナリと共に)
+ * opencode config — 社用PC版 (v2ネイティブ形式 / opencode v2 バイナリ (brew) と共に)
  *
  * 個人PC版 (.chezmoitemplates/opencode-personal) との違い:
- *   - provider は社内用に opencode Zen を予定。キー取得までは Zen を含め遮断
+ *   - providers ブロックなし。社内用に opencode Zen を予定。キー取得までは Zen を含め遮断
  *     (キー取得後はファイル末尾の「zen有効化手順」コメントを参照)
  *   - MCP (lapis-mcp) は設定しない
  *   - データ共有前提の機能を全て無効化:
  *       "share": "disabled" … セッション共有(手動・自動とも)を完全無効化
- *         (v1.18.30でネイティブに機能。v2と同一キー・同一値のため移行時の書換不要)
- *       "disabled_providers": ["opencode"] … Zenをプロバイダ単位で無効化。
- *         v1.18.30 は APIキー未設定でも Zen無料モデル(データ共有前提)を
- *         apiKey:"public" で自動ロードするため、明示的な遮断が必須。
+ *         (v2と同一キー・同一値のためそのまま)
+ *       旧 "disabled_providers": ["opencode"] の v2ネイティブ相当として
+ *         experimental.policies で provider.use deny 文を定義。
+ *         ZenはAPIキー未設定でも無料モデル(データ共有前提)を apiKey:"public" で
+ *         自動ロードするため、明示的な遮断が必須。
  *         詳細: .opencode/research/opencode-zen-free-disable.md
  *
- * 共通の注意: opencode v1.18.30 は v2ネイティブキー (plugins/providers/
- * mcp.servers/agents.permissions配列) をスキーマ上は受け入れるが機能させない。
- * バイナリをv2に上げるまで、このv1形式を維持すること。
- * 詳細: .opencode/research/opencode-v2-config-migration.md
+ * 共通の注意:
+ *   - context-mode は現行バイナリでロード失敗するため plugins から撤去済み
+ *   - agentごとの権限は private_dot_config/opencode/agents/*.md の permissions 配列に
+ *     一元化済み (旧 "agent" ブロックの mcps_*: deny は各agent .md に移行済み)
+ * 詳細: .opencode/research/opencode-v2-native-config-spec.md
  */
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["cc-safety-net", "context-mode"],
   "default_agent": "orchestrator",
+  // cc-safety-net: 破壊的コマンドの fail-closed ブロック (v2 は shell option で方言指定)
+  "plugins": [{ "package": "cc-safety-net@latest", "options": { "shell": "posix" } }],
   "share": "disabled",
-  "disabled_providers": ["opencode"],
-  "lsp": true,
-  "agent": {
-    "orchestrator": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "coder": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "reviewer": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "tester": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "general": {
-      "disable": true
-    }
+  // 旧 "disabled_providers": ["opencode"] の相当品 (policyは後勝ち・未マッチ=allow)
+  "experimental": {
+    "policies": [
+      { "action": "provider.use", "resource": "opencode", "effect": "deny" }
+    ]
+  },
+  // ツール出力のコンテキスト保護: 既定50KB → 20KB に強化
+  "tool_output": { "max_lines": 2000, "max_bytes": 20480 },
+  // 組込み general agent の無効化 (旧v1 "agent": {"general": {"disable": true}} の移植)
+  "agents": {
+    "general": { "disabled": true }
   }
 
   // ---------------------------------------------------------------------------
   // zen有効化手順 (APIキー取得後):
-  //   1. 上部の "disabled_providers" から "opencode" を削除する (必須。
-  //      これを忘れるとキーを設定してもZenはロードされない)
+  //   1. 上部の experimental.policies から provider.use / "opencode" の deny 文を
+  //      削除する (必須。これを忘れるとキーを設定してもZenはロードされない)
   //   2. 社用PCに環境変数 OPENCODE_API_KEY を設定する (ZenのAPIキー)
   //      もしくは opencode TUI の /connect → OpenCode Zen で認証する
   //   3. 以下のコメントを解除する (モデルIDは必ず有料/プライベートのものを指定)
   //   注意: 無料モデルはデータ共有が前提のため使用しないこと
   //   (baseURLは models.dev カタログがzenの既定値を取り込むため指定不要)
   //
-  // "provider": {
+  // "providers": {
   //   "opencode": {
-  //     "options": {
+  //     "settings": {
   //       "apiKey": "{env:OPENCODE_API_KEY}"
   //     }
   //   }

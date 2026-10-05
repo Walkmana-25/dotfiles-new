@@ -3,41 +3,86 @@ description: Creates tests and runs test suites to verify implementations. Can c
 mode: subagent
 hidden: true
 steps: 20
-temperature: 0.1
-permission:
-  read: allow
-  glob: allow
-  grep: allow
-  list: allow
-  edit: allow
-  bash:
-    "*": ask
-    "npm test*": allow
-    "npm run *": allow
-    "npx jest*": allow
-    "npx vitest*": allow
-    "pytest*": allow
-    "cargo test*": allow
-    "go test*": allow
-    "bun test*": allow
-    "bun run *": allow
-    "pnpm test*": allow
-    "pnpm run *": allow
-    "node *": allow
-    "python *": allow
-    "python3 *": allow
-    "ls *": allow
-    "cat *": allow
-    "grep *": allow
-  task: deny
-  todowrite: allow
-  question: deny
-  webfetch: deny
-  websearch: deny
-  skill: deny
-  lsp: allow
-  mcps_*: deny
-  ctx_*: allow
+request:
+  body:
+    temperature: 0.1
+# v2 permissions 配列。ルールは後勝ち (last match wins):
+# 先頭に shell の catch-all ask → allow群 → 末尾に deny群。
+# 複合コマンド (&& / | / ; / $(...)) は分解され、全要素が allow のときのみ
+# 無確認実行 (1つでも ask なら確認ダイアログ、deny なら拒否)。
+permissions:
+  # --- shell: catch-all ask (リスト外はユーザー確認) ---
+  - {action: shell, resource: "*", effect: ask}
+  # --- shell allow: テスト実行 ---
+  - {action: shell, resource: "npm test *", effect: allow}
+  - {action: shell, resource: "npm run *", effect: allow}
+  - {action: shell, resource: "npx jest *", effect: allow}
+  - {action: shell, resource: "npx vitest *", effect: allow}
+  - {action: shell, resource: "pytest *", effect: allow}
+  - {action: shell, resource: "cargo test *", effect: allow}
+  - {action: shell, resource: "go test *", effect: allow}
+  - {action: shell, resource: "bun test *", effect: allow}
+  - {action: shell, resource: "bun run *", effect: allow}
+  - {action: shell, resource: "pnpm test *", effect: allow}
+  - {action: shell, resource: "pnpm run *", effect: allow}
+  - {action: shell, resource: "node *", effect: allow}
+  - {action: shell, resource: "python *", effect: allow}
+  - {action: shell, resource: "python3 *", effect: allow}
+  - {action: shell, resource: "make *", effect: allow}
+  - {action: shell, resource: "bash .opencode/tests/*", effect: allow}
+  - {action: shell, resource: "pip *", effect: allow}
+  - {action: shell, resource: "pip3 *", effect: allow}
+  - {action: shell, resource: "uv *", effect: allow}
+  # --- shell allow: 読み取り系 (結果集計用) ---
+  - {action: shell, resource: "ls *", effect: allow}
+  - {action: shell, resource: "cat *", effect: allow}
+  - {action: shell, resource: "grep *", effect: allow}
+  - {action: shell, resource: "head *", effect: allow}
+  - {action: shell, resource: "tail *", effect: allow}
+  - {action: shell, resource: "wc *", effect: allow}
+  - {action: shell, resource: "sort *", effect: allow}
+  - {action: shell, resource: "uniq *", effect: allow}
+  - {action: shell, resource: "jq *", effect: allow}
+  - {action: shell, resource: "diff *", effect: allow}
+  - {action: shell, resource: "rg *", effect: allow}
+  - {action: shell, resource: "find *", effect: allow}
+  - {action: shell, resource: "stat *", effect: allow}
+  # --- shell allow: gh (読み取り系のみ) ---
+  - {action: shell, resource: "gh pr view *", effect: allow}
+  - {action: shell, resource: "gh pr list *", effect: allow}
+  - {action: shell, resource: "gh pr checks *", effect: allow}
+  - {action: shell, resource: "gh pr diff *", effect: allow}
+  - {action: shell, resource: "gh issue view *", effect: allow}
+  - {action: shell, resource: "gh issue list *", effect: allow}
+  - {action: shell, resource: "gh repo view *", effect: allow}
+  - {action: shell, resource: "gh run view *", effect: allow}
+  - {action: shell, resource: "gh run list *", effect: allow}
+  - {action: shell, resource: "gh auth status *", effect: allow}
+  # --- その他のツール ---
+  - {action: read, resource: "*", effect: allow}
+  - {action: glob, resource: "*", effect: allow}
+  - {action: grep, resource: "*", effect: allow}
+  - {action: list, resource: "*", effect: allow}
+  - {action: edit, resource: "*", effect: allow}
+  - {action: subagent, resource: "*", effect: deny}
+  - {action: todowrite, resource: "*", effect: allow}
+  - {action: question, resource: "*", effect: deny}
+  - {action: webfetch, resource: "*", effect: deny}
+  - {action: websearch, resource: "*", effect: deny}
+  - {action: skill, resource: "*", effect: deny}
+  - {action: mcps_*, resource: "*", effect: deny}
+  # --- shell deny (末尾に配置: 後勝ちでここが最優先) ---
+  - {action: shell, resource: "sudo *", effect: deny}
+  - {action: shell, resource: "su *", effect: deny}
+  - {action: shell, resource: "curl *", effect: deny}
+  - {action: shell, resource: "wget *", effect: deny}
+  - {action: shell, resource: "ssh *", effect: deny}
+  - {action: shell, resource: "scp *", effect: deny}
+  - {action: shell, resource: "sftp *", effect: deny}
+  - {action: shell, resource: "bash -c*", effect: deny}
+  - {action: shell, resource: "sh -c*", effect: deny}
+  - {action: shell, resource: "eval *", effect: deny}
+  - {action: shell, resource: "rm -rf /*", effect: deny}
 ---
 
 You are a test engineer. You create tests and run test suites to verify implementations.
@@ -81,9 +126,8 @@ artifact_path: <出力が大きい場合は .opencode/ 配下に書き出しそ�
 
 本当に短い一問一答（数行で終わるもの）場合は構造化フォーマットを省略して直接返してよい。
 
-## Context Mode integration
+## Context discipline
 
-The shared `ctx_*` routing rules live in the global `AGENTS.md`. For testing:
-
-- **Run tests via bash, but aggregate results through `ctx_execute(language: "shell", ...)`** — extract failures, counts, and error lines, not the entire output.
-- **Reading the implementation under test** → use `ctx_execute_file` for large files; read directly only the small/focused parts you assert against.
+- コマンド出力が大きいと予想される場合は `| head -50` / `| wc -l` / `grep` で必要部分のみ取得 (複合コマンドの各要素が許可対象である必要あり)。テスト出力は失敗行・集計のみ抽出して報告すること
+- 未許可コマンドはユーザーに確認ダイアログが出る。可能な限り許可リスト内のコマンドで目的を達成すること
+- `bash -c` / `eval` / `sudo` / `curl` / `wget` / `ssh` は明示denyされている。スクリプト実行が必要な場合はユーザーに依頼すること

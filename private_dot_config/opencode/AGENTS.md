@@ -1,62 +1,39 @@
-# context-mode — MANDATORY routing rules
+# opencode 運用ルール (global)
 
-context-mode tools (`ctx_*`) are available to every agent. These rules protect the context window from flooding — one unrouted command can dump 56 KB into context. Follow them in every task.
+このファイルは opencode の全セッション・全agentに注入される運用ルールである。
+コンテキスト保護は設定 (`tool_output`: max_lines 2000 / max_bytes 20KB) と、
+以下の行動規範によって担保する (context-mode プラグインは撤去済みのため ctx_* ツールは存在しない)。
 
-## Think in Code — MANDATORY
+## Output discipline (出力抑制)
 
-To analyze / count / filter / compare / search / parse / transform data: **write code** via `ctx_execute(language, code)` and `console.log()` only the answer. Do NOT read raw data into context. PROGRAM the analysis — do not COMPUTE it by reading raw bytes. Pure JavaScript works with Node.js built-ins (`fs`, `path`, `child_process`). Use `try/catch`, handle `null`/`undefined`. One script replaces ten tool calls.
+- コマンド出力が大きいと予想される場合は `| head -50` / `| wc -l` / `grep` で必要部分のみ取得する。
+  複合コマンド (`&&` / `|` / `;` / `$(...)`) は分解され、全要素が許可対象である必要がある点に注意。
+- 生のダンプ (ファイル全体・長いログ・JSON全体) を応答に貼らない。要約して報告する。
+- サブagentは必ず下記の Structured Return 形式で返す。
 
-## BLOCKED — do NOT attempt
+## Shell permissions
 
-### curl / wget — BLOCKED
-Shell `curl` / `wget` are intercepted and blocked. Do NOT retry.
-Use: `ctx_fetch_and_index(url, source)` or `ctx_execute(language: "javascript", code: "const r = await fetch(...)" )`.
+- デフォルトは **ask**。許可リスト外のコマンドはユーザーに確認ダイアログが出る。
+- 許可リスト内のコマンドは無確認で実行できる。可能な限り許可リスト内で目的を達成すること。
+- 複合コマンドは各要素がすべて許可されている必要がある (1つでも ask/deny なら全体がブロックされる)。
+- `bash -c` / `sh -c` / `eval` / `sudo` / `su` / `curl` / `wget` / `ssh` / `scp` / `sftp` は明示 deny。
+  スクリプト実行やネットワーク取得が必要な場合はユーザーに依頼すること。
+- 権限ルールは後勝ち (last match wins): 各agentの permissions 配列は
+  catch-all ask → allow群 → deny群 の順に定義されている。詳細は各 `agents/*.md` の frontmatter。
+- **限界の認識**: glob権限は完全なセキュリティ境界ではない。
+  `find -exec` / `awk` のリダイレクト / `sort -o` / `cat x > file` 等の書き込みベクタや、
+  リダイレクト込みで1文としてマッチされる性質上、読み取り系agent (explorer / tech-researcher / reviewer) の
+  「read-only」は editツール拒否 + 行動規範による保証である。破壊的操作は避けること。
 
-### Inline HTTP — BLOCKED
-`fetch('http`, `requests.get(`, `requests.post(`, `http.get(`, `http.request(` are intercepted. Do NOT retry.
-Use: `ctx_execute(language, code)` — only stdout enters context.
+## Web / MCP hierarchy (優先順位)
 
-### Direct web fetching (non-MCP) — BLOCKED
-`curl`, `wget`, inline `fetch()`/`requests` are blocked. Do NOT use them.
-MCP tools (`mcp__mcps__*`) are NOT blocked — use them for web search/scraping as described below.
-Fallback: `ctx_fetch_and_index(url, source)` then `ctx_search(queries)`.
+Web検索・スクレイピングは MCP ツール (`mcp__mcps__*`) を使う (shell の curl/wget は deny)。
 
-## REDIRECTED — use sandbox
+1. **WEB SEARCH**: `mcp__mcps__searxng_web_search` — first choice for web searches. Privacy-focused metasearch.
+2. **WEB SCRAPE**: `mcp__mcps__firecrawl_scrape` — scrape web pages (handles JS rendering).
+3. **DEEPWIKI**: `mcp__mcps__ask_question` / `mcp__mcps__read_wiki_structure` / `mcp__mcps__read_wiki_contents` — query GitHub repo documentation and code structure via DeepWiki.
 
-### Shell (>20 lines of output)
-Use shell ONLY for: `git`, `mkdir`, `rm`, `mv`, `cd`, `ls`, `npm install`, `pip install`.
-Otherwise: `ctx_batch_execute(commands, queries)` or `ctx_execute(language: "shell", code: "...")`.
-
-### File reading (for analysis)
-Reading to **edit** → reading the file is correct (Edit needs the exact bytes).
-Reading to **analyze / explore / summarize** → `ctx_execute_file(path, language, code)`.
-
-### grep / search (large results)
-Use `ctx_execute(language: "shell", code: "grep ..." )` inside the sandbox.
-
-## Tool selection hierarchy
-
-0. **MEMORY**: `ctx_search(sort: "timeline")` — after resume or compaction, check prior context before asking the user.
-1. **GATHER**: `ctx_batch_execute(commands, queries)` — runs all commands in parallel, auto-indexes each, and returns matching sections. ONE call replaces 30+. Each command is `{label: "header", command: "..."}`.
-2. **FOLLOW-UP**: `ctx_search(queries: ["q1", "q2", ...])` — batch all questions into one array, ONE call (default relevance mode).
-3. **PROCESSING**: `ctx_execute(language, code)` | `ctx_execute_file(path, language, code)` — runs in a sandbox, only stdout enters context.
-4. **WEB SEARCH**: `mcp__mcps__searxng_web_search` — first choice for web searches. Privacy-focused metasearch.
-5. **WEB SCRAPE**: `mcp__mcps__firecrawl_scrape` — scrape web pages (handles JS rendering). Use instead of `ctx_fetch_and_index` for web pages.
-6. **DEEPWIKI**: `mcp__mcps__ask_question` / `mcp__mcps__read_wiki_structure` / `mcp__mcps__read_wiki_contents` — query GitHub repo documentation and code structure via DeepWiki.
-7. **WEB FALLBACK**: `ctx_fetch_and_index(url, source)` then `ctx_search(queries)` — use only when MCP tools are unavailable or unsuitable (e.g., local files, non-HTTP URLs).
-8. **INDEX**: `ctx_index(content, source)` — store in FTS5 for later search.
-
-## Parallel I/O batches
-
-For multi-URL fetches or multi-command batches, **always** pass `concurrency: N` (1-8):
-- `ctx_batch_execute(commands: [3+ network commands], concurrency: 5)` — gh, dig, docker inspect, multi-region cloud queries.
-- `ctx_fetch_and_index(requests: [{url, source}, ...], concurrency: 5)` — multi-URL batch fetch.
-
-**Use concurrency 4-8** for I/O-bound work (network calls, API queries). **Keep concurrency 1** for CPU-bound work (npm test, build, lint) or commands that share state (ports, lock files, same-repo writes).
-
-## Summary discipline
-
-Return only the answer, never raw tool output. Prefer one `ctx_batch_execute` call over many sequential reads. Keep responses concise — context is a shared, finite resource.
+(注: `mcp__mcps__*` は tech-researcher のみ allow。他のagentは delegate to @tech-researcher。)
 
 ## Structured Return (MANDATORY for all subagents)
 

@@ -18,7 +18,6 @@
 **/bun.lock
 **/node_modules/**
 **/backup-*/**
-**/context-mode/**
 **/opencode/.opencode/**
 
 # opencode 設定は全機体に展開され、中身は username で分岐する
