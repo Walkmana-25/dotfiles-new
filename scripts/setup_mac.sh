@@ -74,7 +74,7 @@ PACKAGES_CASK=(
     zed
     zoom
     maccy
-    vicine
+    vicinae
     
 )
 
