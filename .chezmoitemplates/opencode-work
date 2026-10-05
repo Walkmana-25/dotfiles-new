@@ -2,13 +2,16 @@
  * opencode config — 社用PC版 (v1形式で運用: v1.18.30バイナリと共に)
  *
  * 個人PC版 (.chezmoitemplates/opencode-personal) との違い:
- *   - provider は opencode Zen 前提。APIキー未取得のため provider は未定義
+ *   - provider は社内用に opencode Zen を予定。キー取得までは Zen を含め遮断
  *     (キー取得後はファイル末尾の「zen有効化手順」コメントを参照)
  *   - MCP (lapis-mcp) は設定しない
  *   - データ共有前提の機能を全て無効化:
  *       "share": "disabled" … セッション共有(手動・自動とも)を完全無効化
  *         (v1.18.30でネイティブに機能。v2と同一キー・同一値のため移行時の書換不要)
- *       Zenの無料モデルはデータ共有が前提のため使用禁止(有料/プライベートモデルのみ)
+ *       "disabled_providers": ["opencode"] … Zenをプロバイダ単位で無効化。
+ *         v1.18.30 は APIキー未設定でも Zen無料モデル(データ共有前提)を
+ *         apiKey:"public" で自動ロードするため、明示的な遮断が必須。
+ *         詳細: .opencode/research/opencode-zen-free-disable.md
  *
  * 共通の注意: opencode v1.18.30 は v2ネイティブキー (plugins/providers/
  * mcp.servers/agents.permissions配列) をスキーマ上は受け入れるが機能させない。
@@ -20,6 +23,7 @@
   "plugin": ["cc-safety-net", "context-mode"],
   "default_agent": "orchestrator",
   "share": "disabled",
+  "disabled_providers": ["opencode"],
   "lsp": true,
   "agent": {
     "orchestrator": {
@@ -47,9 +51,11 @@
 
   // ---------------------------------------------------------------------------
   // zen有効化手順 (APIキー取得後):
-  //   1. 社用PCに環境変数 OPENCODE_API_KEY を設定する (ZenのAPIキー)
+  //   1. 上部の "disabled_providers" から "opencode" を削除する (必須。
+  //      これを忘れるとキーを設定してもZenはロードされない)
+  //   2. 社用PCに環境変数 OPENCODE_API_KEY を設定する (ZenのAPIキー)
   //      もしくは opencode TUI の /connect → OpenCode Zen で認証する
-  //   2. 以下のコメントを解除する (モデルIDは必ず有料/プライベートのものを指定)
+  //   3. 以下のコメントを解除する (モデルIDは必ず有料/プライベートのものを指定)
   //   注意: 無料モデルはデータ共有が前提のため使用しないこと
   //   (baseURLは models.dev カタログがzenの既定値を取り込むため指定不要)
   //
