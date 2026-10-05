@@ -18,7 +18,7 @@ NC='\033[0m'
 if ! command -v gitleaks &>/dev/null; then
     echo -e "${RED}⚠️  gitleaks が見つかりません。credential スキャンをスキップします。${NC}"
     echo "   インストール: brew install gitleaks"
-    exit 0
+    exit 1
 fi
 
 # ステージングされた差分をスキャン
