@@ -21,14 +21,8 @@
 **/context-mode/**
 **/opencode/.opencode/**
 
-# For Work PC
-{{- if or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta") }}
-{{- end }}
-
-# For Personal PC
-{{- if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) }}
-
-.config/opencode
-{{- end }}
+# opencode 設定は全機体に展開され、中身は username で分岐する
+# (private_dot_config/opencode/opencode.jsonc.tmpl を参照:
+#  ubuntu/yuuta → 個人PC版 / それ以外 → 社用PC版)
 
 

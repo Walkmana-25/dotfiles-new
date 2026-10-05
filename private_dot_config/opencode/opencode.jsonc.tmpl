@@ -1,63 +1,12 @@
-/**
- * opencode config — v1形式で運用(v1.18.30バイナリと共に)
- *
- * 重要: opencode v1.18.30 は v2ネイティブキー (plugins/providers/mcp.servers/
- * agents.permissions配列) を スキーマ上は受け入れるが機能させない
- * (検証済み: "Omitted native setting that cannot be represented in V1",
- *  "Provider not found", "V2 permissions are not supported by OpenCode V1")。
- * ゆえにバイナリをv2に上げるまで、このv1形式を維持すること。
- *
- * v2 への移行日:
- *   - バイナリをv2に上げたら、このファイルはそのまま動く(v2が起動時に自動マイグレーション)
- *   - ネイティブv2形式に書き換えたい場合は同梱の移行ガイドを使用:
- *     .opencode/research/opencode-v2-config-migration.md
- *     .opencode/research/opencode-v2-plugin-compat.md (v2-native設定例を含む)
- *   - task-output-guard.ts は既に v1/v2 両対応 (combined entrypoint) 済み
- *   - @opencode/plugin (v2型) は package.json に追加済み
- */
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": ["cc-safety-net", "context-mode"],
-  "default_agent": "orchestrator",
-  "provider": {
-    "zai-coding-plan": {
-      "options": {
-        "apiKey": "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
-      }
-    }
-  },
-  "lsp": true,
-  "mcp": {
-    "mcps": {
-      "type": "remote",
-      "url": "{{ onepasswordRead "op://TOKEN/lapis-mcp-1/url" }}",
-      "headers": {
-        "Authorization": "Bearer {{ onepasswordRead "op://TOKEN/lapis-mcp-1/credential" }}"
-      },
-      "enabled": true
-    }
-  },
-  "agent": {
-    "orchestrator": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "coder": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "reviewer": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "tester": {
-      "permission": { "mcps_*": "deny" }
-    },
-    "general": {
-      "disable": true
-    }
-  },
-  "command": {
-    "commit": {
-      "description": "Stage all changes and create a commit. The orchestrator reviews the diff, generates the message, and runs every git operation itself (no delegation of git commands).",
-      "template": "You are the orchestrator agent performing an automated commit workflow. Follow these steps exactly in order:\n\n1. Review all current changes YOURSELF by running: git status, git diff, and (if something is staged) git diff --cached. This covers staged changes, unstaged changes, and untracked files. Do NOT delegate git commands to subagents.\n\n2. Write a concise, conventional-commit-style commit message from the diff YOURSELF. Only if the diff is very large, you MAY use the commit-diff-reader subagent to summarize the diff and the commit-message-generator subagent to draft the message — these subagents are strictly READ-ONLY and must never run git write commands.\n\n3. Stage all changes YOURSELF by running: git add -A\n\n4. Commit YOURSELF using a heredoc to pass the message directly without creating any temporary file. Run the following bash command (replace <message> with the actual commit message):\ngit commit -F - << 'COMMIT_MSG_EOF'\n<message>\nCOMMIT_MSG_EOF\nThe heredoc delimiter COMMIT_MSG_EOF must be on its own line with no leading/trailing whitespace. Do NOT create any temporary files. Do NOT delegate this to any subagent.\n\n5. Display the result by running: git log -1 --stat\n\nReport the final commit that was made."
-    }
-  }
-}
+{{- /*
+  opencode 設定ディスパッチャ: 社用PC / 個人PC で中身を切り替える。
+
+  判定基準は .chezmoiignore と同一:
+    username が ubuntu / yuuta     → 個人PC版 (.chezmoitemplates/opencode-personal)
+    username が ubuntu / yuuta 以外 → 社用PC版 (.chezmoitemplates/opencode-work)
+*/ -}}
+{{- if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) -}}
+{{ includeTemplate "opencode-work" . }}
+{{- else -}}
+{{ includeTemplate "opencode-personal" . }}
+{{- end -}}
