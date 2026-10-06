@@ -87,3 +87,23 @@ for pkg in "${PACKAGES_CASK[@]}"; do
         brew install --cask -y "$pkg"
     fi
 done
+
+echo "--------------------------------------------------"
+echo "Colima Configuration"
+echo "--------------------------------------------------"
+
+set -eu
+
+CONFIG_HASH='{{ includeTemplate "dot_colima/default/colima.yaml.tmpl" . | sha256sum }}'
+
+if ! command -v colima >/dev/null 2>&1; then
+    echo "colima is not installed; skipping restart (config hash: ${CONFIG_HASH})" >&2
+    exit 0
+fi
+
+if colima status default >/dev/null 2>&1; then
+    echo "Applying Colima config ${CONFIG_HASH}; restarting default profile"
+    exec colima restart default
+fi
+
+echo "Colima default profile is not running; config ${CONFIG_HASH} will apply on next start" >&2

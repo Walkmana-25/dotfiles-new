@@ -19,6 +19,12 @@ model_catalog_json = "{{ .chezmoi.homeDir }}/.codex/models.json"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
+# codex_apps (ChatGPT Apps 連携の組み込み MCP) は ChatGPT 認証 cookie ("biscuit")
+# を要求するため、Z.AI API キー運用では HTTP 451 no_biscuit_no_service で
+# 必ず起動失敗する。使わないので無効化する。
+[features]
+apps = false
+
 [model_providers.ZAI]
 name = "ZAI"
 base_url = "https://api.z.ai/api/v1"
@@ -34,12 +40,13 @@ refresh_interval_ms = 0
 
 # lapis-mcp (リモート MCP server / streamable HTTP)。
 # server名 "mcps" は opencode 構成と整合するため維持。
-# Bearer トークンは http_headers_helper (別スクリプト) が 1Password から取得する。
+# Bearer トークンは chezmoi apply 時に平文展開する。
+# (Codex 起動時に 1Password CLI / helper を実行しない)
 [mcp_servers.mcps]
 url = "{{ onepasswordRead "op://TOKEN/lapis-mcp-1/url" }}"
-http_headers_helper = "{{ .chezmoi.homeDir }}/.local/bin/codex-mcp-headers"
+http_headers = { Authorization = "Bearer {{ onepasswordRead "op://TOKEN/lapis-mcp-1/credential" }}" }
 
 [agents]
 enabled = true
-default_subagent_model = "glm-5.3"
+default_subagent_model = "glm-5.3-flash"
 default_subagent_reasoning_effort = "medium"

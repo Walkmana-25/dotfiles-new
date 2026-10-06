@@ -1,0 +1,72 @@
+{{- $cpu := .colima.cpu -}}
+{{- $hostMemoryBytes := output "sysctl" "-n" "hw.memsize" | trim -}}
+{{- $memory := div (div $hostMemoryBytes .colima.memory_ratio_divisor) 1073741824 -}}
+{{- $disk := .colima.disk -}}
+{{- $arch := .colima.arch -}}
+{{- $runtime := .colima.runtime -}}
+{{- $vmType := .colima.vmType -}}
+{{- $mountType := .colima.mountType -}}
+cpu: {{ $cpu }}
+memory: {{ $memory }}
+disk: {{ $disk }}
+arch: {{ $arch | toJson }}
+runtime: {{ $runtime | toJson }}
+modelRunner: docker
+hostname: null
+kubernetes:
+  enabled: false
+  version: v1.35.0+k3s1
+  k3sArgs:
+    - --disable=traefik
+  port: 0
+autoActivate: true
+network:
+  address: false
+  mode: shared
+  interface: en0
+  preferredRoute: false
+  dns: []
+  dnsHosts:
+    host.docker.internal: host.lima.internal
+  hostAddresses: false
+  gatewayAddress: 192.168.5.2
+forwardAgent: false
+docker: {}
+vmType: {{ $vmType | toJson }}
+portForwarder: ssh
+rosetta: false
+binfmt: true
+nestedVirtualization: false
+mountType: {{ $mountType | toJson }}
+mountInotify: false
+cpuType: host
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      set -eu
+      missing=
+      for package in zram-tools linux-modules-extra-$(uname -r); do
+          if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q '^install ok installed$'; then
+              missing="$missing $package"
+          fi
+      done
+      if [ -n "$missing" ]; then
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y $missing
+      fi
+      modprobe zram
+      cat >/etc/default/zramswap <<'EOF'
+      ALGO={{ .colima.zram.algorithm }}
+      PERCENT={{ .colima.zram.percent }}
+      EOF
+      systemctl restart zramswap.service
+      printf '%s\n' 'vm.swappiness={{ .colima.swappiness }}' >/etc/sysctl.d/99-colima-zram.conf
+      sysctl -w vm.swappiness={{ .colima.swappiness }}
+sshConfig: true
+sshPort: 0
+mounts: []
+diskImage: ""
+forceDiskImage: false
+rootDisk: 20
+env: {}

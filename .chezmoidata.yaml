@@ -1,0 +1,14 @@
+colima:
+  cpu: 8
+  memory_ratio_divisor: 4
+  disk: 100
+  arch: host
+  runtime: docker
+  vmType: vz
+  mountType: sshfs
+  zram:
+    algorithm: zstd
+    percent: 50
+  swappiness: 100
+  profile_overrides:
+    default: {}
