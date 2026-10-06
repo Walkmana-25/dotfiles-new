@@ -37,6 +37,7 @@ PACKAGES=(
     lsd
     neovim
     ripgrep
+    codex
     opencode
     starship
     trash-cli

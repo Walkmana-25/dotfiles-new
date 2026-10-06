@@ -1,0 +1,10 @@
+# Codex プロファイル — glm-5.3-flash (高速・3倍 quota)
+#
+# codex --profile flash で起動すると config.toml にこの内容を上書きマージする。
+# 個人PC (Z.AI Coding Plan) 向け。社用PC には .chezmoiignore で展開しない。
+#
+# effort はサーバー側で low / high / max の 3 段階に正規化される。
+# flash は軽量モデルのため既定 effort は high (flagship と違い max 固定にしない)。
+
+model = "glm-5.3-flash"
+model_reasoning_effort = "high"

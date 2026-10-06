@@ -24,4 +24,10 @@
 # (private_dot_config/opencode/opencode.jsonc.tmpl を参照:
 #  ubuntu/yuuta → 個人PC版 / それ以外 → 社用PC版)
 
+# codex の models.json / flash.config.toml は個人PC (ubuntu / yuuta) のみに展開する
+# (社用PC の codex-work は ollama を使い Z.AI 関連を参照しないため不要)
+{{ if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) }}
+.codex/models.json
+.codex/flash.config.toml
+{{ end }}
 

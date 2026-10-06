@@ -1,0 +1,45 @@
+# Codex 設定 — 個人PC版
+#
+# Z.AI GLM (Coding Plan) を model_providers 経由で使う構成。
+# 構文の一次ソース: .opencode/research/codex-cli-config-spec.md
+# 注意:
+#   - { onepasswordRead } / { .chezmoi.homeDir } は chezmoi テンプレート式
+#     (適用時に展開される)。壊さないこと。
+#   - API キーは平文で持たず [model_providers.ZAI.auth] (1Password CLI の
+#     direct spawn) で解決する。
+#   - 実行時に op が PATH 上に解決できること (brew の /opt/homebrew/bin 等)。
+#     GUI / IDE から codex を起動する場合は PATH が絞られるため注意。
+#   - TOML 仕様上、トップレベルキーは最初のテーブルヘッダより前に置くこと。
+
+model_provider = "ZAI"
+model = "glm-5.3"
+model_reasoning_effort = "high"
+model_catalog_json = "{{ .chezmoi.homeDir }}/.codex/models.json"
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[model_providers.ZAI]
+name = "ZAI"
+base_url = "https://api.z.ai/api/v1"
+wire_api = "responses"
+
+# 1Password CLI からトークンを解決 (シェルを経由しない direct spawn。
+# refresh_interval_ms = 0 で 401 リトライ時のみ再実行)
+[model_providers.ZAI.auth]
+command = "op"
+args = ["read", "op://TOKEN/zai-api-key/credential"]
+timeout_ms = 15000
+refresh_interval_ms = 0
+
+# lapis-mcp (リモート MCP server / streamable HTTP)。
+# server名 "mcps" は opencode 構成と整合するため維持。
+# Bearer トークンは http_headers_helper (別スクリプト) が 1Password から取得する。
+[mcp_servers.mcps]
+url = "{{ onepasswordRead "op://TOKEN/lapis-mcp-1/url" }}"
+http_headers_helper = "{{ .chezmoi.homeDir }}/.local/bin/codex-mcp-headers"
+
+[agents]
+enabled = true
+default_subagent_model = "glm-5.3"
+default_subagent_reasoning_effort = "medium"

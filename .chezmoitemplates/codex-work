@@ -1,0 +1,34 @@
+# Codex 設定 — 社用PC版
+#
+# ollama (ローカル LLM) 前提の構成。Z.AI (GLM Coding Plan) は社用PCでは
+# 利用できないため、意図的に設定を入れない (ChatGPT ログインとの併用可:
+# codex --oss ではなく通常起動なら ChatGPT 側の既定モデルを使う)。
+# 個人PC版 (.chezmoitemplates/codex-personal) との違い:
+#   - model_provider は ollama のみ。Z.AI provider / models.json なし
+#   - MCP (lapis-mcp) も設定しない
+#   - 機密値・onepasswordRead・op:// 参照はこのファイルに一切含めない
+#
+# 注意:
+#   - ollama v0.13.3 以降は OpenAI Responses API (/v1/responses) に対応しており、
+#     現行 Codex (wire_api = "responses" のみ) でそのまま使える
+#   - model は ollama 側に pull 済みのモデル名に合わせること (gemma4-26b)
+#   - thinking 非対応モデルに reasoning.effort を送るとエラーになり得る
+#     (ollama は reasoning.effort を think にマップ)。エラーが出る場合は
+#     model_reasoning_effort の設定やモデル側の think 対応を確認すること
+#   - model_context_window は ollama サーバーの実効コンテキスト
+#     (OLLAMA_CONTEXT_LENGTH / num_ctx、既定 4K〜8K と小さい) に合わせること。
+#     窓より大きい値を宣言すると ollama が黙って入力を刈る
+
+model_provider = "ollama"
+model = "gemma4-26b"
+model_context_window = 32768
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[model_providers.ollama]
+name = "Ollama (local)"
+base_url = "http://localhost:11434/v1"
+wire_api = "responses"
+# 認証キー不要: env_key / auth / bearer_token を省略すると Authorization
+# ヘッダなしでローカル ollama に接続する

@@ -1,0 +1,126 @@
+# ~/.codex/rules/default.rules — global exec policy (experimental)
+#
+# 方針: 読み取り系は素通し、危険物は禁止、git の状態変更はユーザー承認 (prompt)、
+#       それ以外は sandbox / approval に任せる。
+#       (opencode 時代の「orchestratorのみgit書き込み可」運用を承認ベースに置き換え)
+#
+# 注意:
+#   - decision の競合は最も制限的なものが勝つ (forbidden > prompt > allow)。
+#   - リダイレクト / $(...) / 変数 / ワイルドカードを含む複合コマンドは分割されず
+#     1 コマンドとして評価される (保守的フォールバック)。find -exec 等の書き込み
+#     ベクタは理論上 allow をすり抜け得るため、実害は sandbox_mode 側で抑止する
+#     多層防御の前提で運用すること。
+#   - テスト: codex execpolicy check --pretty --rules ~/.codex/rules/default.rules -- <cmd...>
+
+# --- forbidden: opencode 時代の明示 deny 群を移植 ---
+prefix_rule(pattern = ["sudo"], decision = "forbidden",
+            justification = "Privilege escalation is blocked. Ask the user to run privileged commands themselves.")
+prefix_rule(pattern = ["su"], decision = "forbidden",
+            justification = "Privilege escalation is blocked. Ask the user instead.")
+prefix_rule(pattern = ["curl"], decision = "forbidden",
+            justification = "HTTP fetch must go through the mcps MCP server (web search / scrape tools).",
+            match = ["curl https://example.com"],
+            not_match = ["echo curl"])
+prefix_rule(pattern = ["wget"], decision = "forbidden",
+            justification = "HTTP fetch must go through the mcps MCP server (web search / scrape tools).")
+prefix_rule(pattern = ["ssh"], decision = "forbidden",
+            justification = "Remote access is blocked. Ask the user to run ssh commands themselves.")
+prefix_rule(pattern = ["scp"], decision = "forbidden",
+            justification = "File transfer to remote hosts is blocked. Ask the user instead.")
+prefix_rule(pattern = ["sftp"], decision = "forbidden",
+            justification = "File transfer to remote hosts is blocked. Ask the user instead.")
+prefix_rule(pattern = ["bash", ["-c", "-lc"]], decision = "forbidden",
+            justification = "Run commands directly instead of wrapping them in a shell string.",
+            match = ["bash -c echo hi", "bash -lc ls /tmp"],
+            not_match = ["bash --version", "bash script.sh"])
+prefix_rule(pattern = ["sh", ["-c", "-lc"]], decision = "forbidden",
+            justification = "Run commands directly instead of wrapping them in a shell string.",
+            match = ["sh -c echo hi"],
+            not_match = ["sh script.sh"])
+prefix_rule(pattern = ["eval"], decision = "forbidden",
+            justification = "Dynamic evaluation is blocked. Run the command directly.")
+prefix_rule(pattern = ["rm", ["-rf", "-fr"]], decision = "forbidden",
+            justification = "Use a scoped `rm` with an explicit path instead.",
+            match = ["rm -rf /tmp/build", "rm -fr /tmp/build"],
+            not_match = ["rm build/artifact.o", "rm -r build"])
+# 引数順入れ替え (`rm -r -f`) も禁止 (ユニオンは隣接した 1 トークンしか見ないため)
+prefix_rule(pattern = ["rm", "-r", "-f"], decision = "forbidden",
+            justification = "Use a scoped `rm` with an explicit path instead (flag order variants are also blocked).")
+prefix_rule(pattern = ["sed", ["-i", "--in-place"]], decision = "forbidden",
+            justification = "In-place file editing is blocked. Use the Edit tool instead.",
+            match = ["sed -i '' s/a/b/ file.txt"],
+            not_match = ["sed -n 1,10p file.txt"])
+prefix_rule(pattern = ["tee"], decision = "forbidden",
+            justification = "tee can write to arbitrary files (same as the opencode-era `tee *` deny). Use the Edit tool instead.",
+            not_match = ["echo hi | grep hi"])
+prefix_rule(pattern = ["git", "push", "--force"], decision = "forbidden",
+            justification = "Use `git push --force-with-lease` instead.",
+            match = ["git push --force origin main"],
+            not_match = ["git push --force-with-lease origin main", "git push origin main"])
+
+# --- allow: 読み取り系 git (opencode エージェントの allow 群から翻訳) ---
+prefix_rule(pattern = ["git", "status"], decision = "allow",
+            justification = "read-only git command",
+            match = ["git status", "git status --short"],
+            not_match = ["git stash list"])
+for cmd in (["git", "diff"], ["git", "log"], ["git", "show"], ["git", "blame"],
+            ["git", "ls-files"], ["git", "rev-parse"], ["git", "describe"],
+            ["git", "shortlog"], ["git", "check-ignore"], ["git", "config", "--get"]):
+    prefix_rule(pattern = cmd, decision = "allow",
+                justification = "read-only git command")
+# git remote の参照のみ allow (`git remote add` / `remove` は allow しない)
+prefix_rule(pattern = ["git", "remote", ["-v", "get-url", "show"]], decision = "allow",
+            justification = "read-only git remote inspection",
+            match = ["git remote -v", "git remote get-url origin"],
+            not_match = ["git remote add origin url", "git remote remove origin"])
+
+# --- allow: 読み取り系テキスト/ファイルユーティリティ ---
+# 注: awk は意図的に allow しない。`awk '...' > file` のリダイレクトが複合コマンドと
+# 分割されず 1 コマンド評価されて allow になり得る write vector となるため。
+for cmd in (["ls"], ["cat"], ["head"], ["tail"], ["wc"], ["grep"], ["rg"], ["fd"],
+            ["find"], ["diff"], ["cmp"], ["stat"], ["jq"], ["tree"], ["file"], ["pwd"],
+            ["which"], ["date"], ["sort"], ["uniq"], ["cut"]):
+    prefix_rule(pattern = cmd, decision = "allow",
+                justification = "read-only file/text utility")
+# sed は読み取り (-n) のみ allow。`sed -i` / `--in-place` は forbidden と共存する
+# (競合時は最も制限的な decision が勝つため in-place 編集は塞がったまま)
+prefix_rule(pattern = ["sed", "-n"], decision = "allow",
+            justification = "read-only sed print mode",
+            match = ["sed -n 1,10p file.txt"],
+            not_match = ["sed -i '' s/a/b/ file.txt"])
+
+# --- allow: バージョン確認系 ---
+for cmd in (["node", "--version"], ["node", "-v"],
+            ["npm", "--version"], ["npm", "-v"],
+            ["npx", "--version"], ["npx", "-v"],
+            ["pnpm", "--version"], ["pnpm", "-v"],
+            ["python", "--version"], ["python3", "--version"],
+            ["pytest", "--version"], ["cargo", "--version"], ["go", "version"],
+            ["make", "--version"]):
+    prefix_rule(pattern = cmd, decision = "allow",
+                justification = "tool version check")
+
+# --- allow: gh (読み取り系のみ) ---
+prefix_rule(pattern = ["gh", "pr", ["view", "list", "checks", "diff"]], decision = "allow",
+            justification = "read-only gh command",
+            match = ["gh pr view 7888", "gh pr checks 7888"],
+            not_match = ["gh pr merge 7888", "gh pr create"])
+prefix_rule(pattern = ["gh", "issue", ["view", "list"]], decision = "allow",
+            justification = "read-only gh command")
+prefix_rule(pattern = ["gh", "repo", "view"], decision = "allow",
+            justification = "read-only gh command")
+prefix_rule(pattern = ["gh", "run", ["view", "list"]], decision = "allow",
+            justification = "read-only gh command")
+prefix_rule(pattern = ["gh", "auth", "status"], decision = "allow",
+            justification = "read-only gh command")
+
+# --- prompt: git の状態変更 (承認は取るが禁止はしない) ---
+# `git branch` は参照 (一覧) と作成/削除を prefix では区別できないため、
+# 最も制限的な decision が勝つ仕様に従い prompt に寄せている。
+for cmd in (["git", "add"], ["git", "commit"], ["git", "push"], ["git", "pull"],
+            ["git", "fetch"], ["git", "stash"], ["git", "checkout"], ["git", "restore"],
+            ["git", "switch"], ["git", "branch"], ["git", "tag"], ["git", "merge"],
+            ["git", "rebase"], ["git", "cherry-pick"], ["git", "rm"], ["git", "mv"],
+            ["git", "worktree"]):
+    prefix_rule(pattern = cmd, decision = "prompt",
+                justification = "state-changing git operation requires user approval")

@@ -1,0 +1,12 @@
+{{- /*
+  Codex 設定ディスパッチャ: 社用PC / 個人PC で中身を切り替える。
+
+  判定基準は .chezmoiignore と同一:
+    username が ubuntu / yuuta     → 個人PC版 (.chezmoitemplates/codex-personal)
+    username が ubuntu / yuuta 以外 → 社用PC版 (.chezmoitemplates/codex-work)
+*/ -}}
+{{- if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) -}}
+{{ includeTemplate "codex-work" . }}
+{{- else -}}
+{{ includeTemplate "codex-personal" . }}
+{{- end -}}
