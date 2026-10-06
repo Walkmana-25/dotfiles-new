@@ -14,9 +14,9 @@
  *   - 追加: "tool_output" でツール出力のコンテキスト保護を強化
  *
  * 詳細: .opencode/research/opencode-v2-native-config-spec.md
- * 注意: {{ onepasswordRead ... }} は chezmoi テンプレート式 (適用時に展開される)。
+ * 注意: { onepasswordRead } は chezmoi テンプレート式 (適用時に展開される)。
  *       壊さないこと。
- */
+ **/
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "orchestrator",
