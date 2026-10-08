@@ -31,3 +31,8 @@
 .codex/flash.config.toml
 {{ end }}
 
+# colima は macOS のみに適用する
+{{ if ne .chezmoi.os "darwin" }}
+.colima
+{{ end }}
+
