@@ -1,0 +1,6 @@
+font-family = "Hack Nerd Font"
+
+background-opacity = 0.92
+background-blur = true
+
+# tmux / shell側でキーバインドを管理するため、Ghostty側ではkeybindを設定しない
