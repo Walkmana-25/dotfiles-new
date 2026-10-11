@@ -1,0 +1,32 @@
+{{- $tmux := lookPath "tmux" -}}
+
+{{- /* lookPathが相対パスを返した場合は使わない */ -}}
+{{- if and $tmux (ne (printf "%.1s" $tmux) "/") -}}
+  {{- $tmux = "" -}}
+{{- end -}}
+
+{{- /* PATH解決できない場合のOS/arch別フォールバック */ -}}
+{{- if not $tmux -}}
+  {{- if eq .chezmoi.os "darwin" -}}
+    {{- if eq .chezmoi.arch "arm64" -}}
+      {{- $tmux = "/opt/homebrew/bin/tmux" -}}
+    {{- else if eq .chezmoi.arch "amd64" -}}
+      {{- $tmux = "/usr/local/bin/tmux" -}}
+    {{- end -}}
+  {{- else if eq .chezmoi.os "linux" -}}
+    {{- $tmux = "/usr/bin/tmux" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $tmux -}}
+  {{- fail "tmux not found" -}}
+{{- end -}}
+
+font-family = "Hack Nerd Font"
+
+background-opacity = 0.92
+background-blur = true
+
+command = {{ $tmux }} new-session -A -s main
+
+# tmux / shell側でキーバインドを管理するため、Ghostty側ではkeybindを設定しない

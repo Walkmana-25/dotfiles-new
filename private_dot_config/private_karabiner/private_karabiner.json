@@ -149,7 +149,9 @@
                                             "com.microsoft.VSCodeInsiders",
                                             "com.microsoft.VSCode",
                                             "dev.zed.Zed",
-                                            "com.apple.Terminal"
+                                            "com.apple.Terminal",
+					    "com.mitchellh.ghostty"
+
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -179,7 +181,8 @@
                                             "com.microsoft.VSCodeInsiders",
                                             "com.microsoft.VSCode",
                                             "dev.zed.Zed",
-                                            "com.apple.Terminal"
+                                            "com.apple.Terminal",
+					    "com.mitchellh.ghostty"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -422,7 +425,8 @@
                                             "com.googlecode.iterm2",
                                             "com.microsoft.VSCodeInsiders",
                                             "com.microsoft.VSCode",
-                                            "com.apple.Terminal"
+                                            "com.apple.Terminal",
+					    "com.mitchellh.ghostty"
                                         ],
                                         "description": "",
                                         "type": "frontmost_application_if"
@@ -452,7 +456,8 @@
                                             "com.googlecode.iterm2",
                                             "com.microsoft.VSCodeInsiders",
                                             "com.microsoft.VSCode",
-                                            "com.apple.Terminal"
+                                            "com.apple.Terminal",
+					    "com.mitchellh.ghostty"
                                         ],
                                         "description": "",
                                         "type": "frontmost_application_unless"
@@ -468,7 +473,8 @@
                                         "bundle_identifiers": [
                                             "com.googlecode.iterm2",
                                             "com.microsoft.VSCodeInsiders",
-                                            "com.microsoft.VSCode"
+                                            "com.microsoft.VSCode",
+					    "com.mitchellh.ghostty"
                                         ],
                                         "description": "",
                                         "type": "frontmost_application_unless"
@@ -491,7 +497,8 @@
                                             "com.microsoft.VSCodeInsiders",
                                             "com.microsoft.VSCode",
                                             "dev.zed.Zed",
-                                            "com.apple.Terminal"
+                                            "com.apple.Terminal",
+					    "com.mitchellh.ghostty"
                                         ],
                                         "description": "",
                                         "type": "frontmost_application_if"
