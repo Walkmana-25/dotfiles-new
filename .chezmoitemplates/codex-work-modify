@@ -1,0 +1,11 @@
+{{- /*
+  社用PC版 ~/.codex/config.toml の内容変更 (modify テンプレート)。
+  機密値・Z.AI provider は社用PC版に存在しないため、変更すべき箇所はない。
+  既存内容があればそのまま保持し、空 (新マシン初回適用) なら
+  全量テンプレート codex-work を出力する。
+*/ -}}
+{{- if eq .chezmoi.stdin "" -}}
+{{- includeTemplate "codex-work" . -}}
+{{- else -}}
+{{- .chezmoi.stdin -}}
+{{- end -}}

@@ -1,0 +1,32 @@
+{{- /*
+  個人PC版 ~/.codex/config.toml の内容変更 (modify テンプレート)。
+  .chezmoi.stdin (既存ファイル全文) に対し、以下の3箇所のみ冪等に置換する:
+    1. 旧ヘッダーコメント → 新コメント
+    2. [model_providers.ZAI.auth] ブロック (コメント込み) →
+       experimental_bearer_token = "<1Password から展開した API キー>"
+    3. 既存 experimental_bearer_token 行の値を再展開 (キーローテーション対応)
+  アプリ / CLI が実行時に追記する他セクションには一切触れない。
+  stdin が空 (新マシン初回適用) なら全量テンプレート codex-personal を出力。
+  注意: 置換文字列に Go regexp の $ 参照解釈が適用されるため、
+  API キーに $ を含む場合は printf ではなく別の組み方が必要。
+*/ -}}
+{{- $key := onepasswordRead "op://TOKEN/zai-api-key/credential" -}}
+{{- $stdin := .chezmoi.stdin -}}
+{{- if eq $stdin "" -}}
+{{- includeTemplate "codex-personal" . -}}
+{{- else -}}
+{{- $out := $stdin -}}
+{{- $out = replaceAllRegex
+      "(?s)#   - API キーは平文で持たず.*?PATH が絞られるため注意。\\n"
+      "#   - API キーは chezmoi apply 時に onepasswordRead で一度だけ解決し、\n#     experimental_bearer_token として平文展開する (Codex 起動時に\n#     1Password CLI を実行しない。mcps の Bearer と同方式)。\n#   - キーをローテーションした場合は chezmoi apply の再実行が必要。\n"
+      $out -}}
+{{- $out = replaceAllRegex
+      "(?s)# 1Password CLI からトークンを解決.*?refresh_interval_ms = 0\\n"
+      (printf "# API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\nexperimental_bearer_token = %q\n" $key)
+      $out -}}
+{{- $out = replaceAllRegex
+      "(?m)^experimental_bearer_token = \".*\"$"
+      (printf "experimental_bearer_token = %q" $key)
+      $out -}}
+{{- $out -}}
+{{- end -}}

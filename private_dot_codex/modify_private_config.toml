@@ -1,0 +1,19 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /*
+  Codex 設定ディスパッチャ (modify テンプレート)。
+
+  ~/.codex/config.toml は ChatGPT デスクトップアプリ / Codex CLI が実行時に
+  書き換える ([projects] / [plugins] / [tui] / [desktop] / notify /
+  mcp_servers.node_repl 等を動的に追加する) ため、通常のテンプレートによる
+  全量上書きはアプリ側の書き込みと衝突する。そこで modify テンプレートで
+  既存内容 (.chezmoi.stdin) を保持しつつ必要箇所のみ変更する。
+
+  判定基準は .chezmoiignore と同一:
+    username が ubuntu / yuuta     → 個人PC版 (.chezmoitemplates/codex-personal-modify)
+    username が ubuntu / yuuta 以外 → 社用PC版 (.chezmoitemplates/codex-work-modify)
+*/ -}}
+{{- if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) -}}
+{{- includeTemplate "codex-work-modify" . -}}
+{{- else -}}
+{{- includeTemplate "codex-personal-modify" . -}}
+{{- end -}}

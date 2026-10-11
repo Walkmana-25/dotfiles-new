@@ -5,10 +5,10 @@
 # 注意:
 #   - { onepasswordRead } / { .chezmoi.homeDir } は chezmoi テンプレート式
 #     (適用時に展開される)。壊さないこと。
-#   - API キーは平文で持たず [model_providers.ZAI.auth] (1Password CLI の
-#     direct spawn) で解決する。
-#   - 実行時に op が PATH 上に解決できること (brew の /opt/homebrew/bin 等)。
-#     GUI / IDE から codex を起動する場合は PATH が絞られるため注意。
+#   - API キーは chezmoi apply 時に onepasswordRead で一度だけ解決し、
+#     experimental_bearer_token として平文展開する (Codex 起動時に
+#     1Password CLI を実行しない。mcps の Bearer と同方式)。
+#   - キーをローテーションした場合は chezmoi apply の再実行が必要。
 #   - TOML 仕様上、トップレベルキーは最初のテーブルヘッダより前に置くこと。
 
 model_provider = "ZAI"
@@ -37,13 +37,9 @@ name = "ZAI"
 base_url = "https://api.z.ai/api/v1"
 wire_api = "responses"
 
-# 1Password CLI からトークンを解決 (シェルを経由しない direct spawn。
-# refresh_interval_ms = 0 で 401 リトライ時のみ再実行)
-[model_providers.ZAI.auth]
-command = "op"
-args = ["read", "op://TOKEN/zai-api-key/credential"]
-timeout_ms = 15000
-refresh_interval_ms = 0
+# API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。
+# (Codex 起動時に op を実行しない)
+experimental_bearer_token = "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
 
 # lapis-mcp (リモート MCP server / streamable HTTP)。
 # server名 "mcps" は opencode 構成と整合するため維持。
