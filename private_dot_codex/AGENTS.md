@@ -14,8 +14,9 @@ global + project の AGENTS.md 合計で 32KiB 制限 (project_doc_max_bytes) �
 - git の状態変更操作 (add / commit / push / pull / fetch / stash / checkout /
   restore / switch / branch / tag / merge / rebase 等) は rules の prompt による
   ユーザー承認を得た上で、必ず自分自身で実行する。サブエージェントに委譲しない。
-- 不明点 (API 仕様・ライブラリの使い方・設定の shape・エラーの意味) は推測せず、
-  tech_researcher サブエージェントに調査を委譲してから計画する。
+- 実装判断に影響する不明点 (API 仕様・ライブラリの使い方・設定の shape・
+  エラーの意味) は推測せず、tech_researcher サブエージェントに調査を委譲する。
+  ただし、既存コードや既知のパターンで判断できる事項は委譲しない。
 
 ## サブエージェント (~/.codex/agents/*.toml)
 
@@ -32,6 +33,11 @@ global + project の AGENTS.md 合計で 32KiB 制限 (project_doc_max_bytes) �
   の 4 点を必ず含める。欠けるとサブエージェントが暴走する。
 - 読み取り系サブエージェントは read-only sandbox で動くが、`find -exec` や
   リダイレクト等の書き込みベクタは残る。破壊的な操作は避けること。
+- tech_researcher への委譲は調査対象を 4 項目以内に絞り、期待出力上限と
+  source 上限 (原則 3 件) を明示する。網羅比較・全文スクレイピング・
+  バージョン履歴の列挙を求めない。
+- tech_researcher の返答目安は本文 800 字以内。詳細より「意思決定に必要な
+  事実・制約・出典」を優先し、不明値は推測せず `未確認` と報告させる。
 
 ## Output discipline (出力抑制)
 
@@ -47,7 +53,7 @@ global + project の AGENTS.md 合計で 32KiB 制限 (project_doc_max_bytes) �
 ```
 summary: <結論・成果を数行（最大5-10行）で>
 key_findings:
-- <要点3-5個を箇条書き>
+- <要点3-5個を箇条書き。tech_researcher は最大5個>
 artifact_path: <出力が大きい（目安: 2KB超）場合のみ詳細をファイルに書き出しそのパス。小さい場合は省略可>
 ```
 

@@ -13,8 +13,10 @@
   },
   "agent": {
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-5-mini"
+      "effort": "medium",
+      "enable_thinking": true,
+      "provider": "zed.dev",
+      "model": "claude-haiku-5-5"
     },
     "play_sound_when_agent_done": false
   },

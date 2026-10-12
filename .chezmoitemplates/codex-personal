@@ -14,6 +14,8 @@
 model_provider = "ZAI"
 model = "glm-5.3-flash"
 model_reasoning_effort = "high"
+auto_compact_token_limit = 120000
+tool_output_token_limit = 4000
 model_catalog_json = "{{ .chezmoi.homeDir }}/.codex/models.json"
 
 approval_policy = "on-request"
