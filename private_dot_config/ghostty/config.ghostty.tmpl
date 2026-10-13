@@ -28,5 +28,5 @@ background-opacity = 0.85
 background-blur = true
 term = xterm-256color
 
-command = /bin/bash -c "TERM=xterm-256color {{ $tmux }} new-session -A -s main"
+command = /bin/zsh -c "TERM=xterm-256color {{ $tmux }} new-session -A -s main"
 # tmux / shell側でキーバインドを管理するため、Ghostty側ではkeybindを設定しない
