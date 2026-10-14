@@ -44,6 +44,9 @@ disable_on_external_context = false
 name = "litellm"
 base_url = "{{ $litUrl }}/v1"
 wire_api = "responses"
+# ネイティブ standalone web search ツールを provider 能力として宣言する。
+# (gateway 側が対応しない場合は検索実行時に失敗する)
+supports_standalone_web_search = true
 
 # API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。
 # (Codex 起動時に op を実行しない)

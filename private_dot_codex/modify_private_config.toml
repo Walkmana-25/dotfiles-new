@@ -42,7 +42,7 @@
 {{- /* 2a. 旧 [model_providers.ZAI.auth] サブブロック形式 → 平文トークン行化 */ -}}
 {{- $out = replaceAllRegex `(?s)# 1Password CLI からトークンを解決.*?refresh_interval_ms = 0\n` (printf "# API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\nexperimental_bearer_token = %q\n" $litKey) $out -}}
 {{- /* 2b. [model_providers.ZAI] ブロック → [model_providers.litellm] ブロック */ -}}
-{{- $out = replaceAllRegex `(?s)\[model_providers\.ZAI\].*?experimental_bearer_token = "[^"]*"\n` (printf "# URL / API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\n[model_providers.litellm]\nname = \"litellm\"\nbase_url = %q\nwire_api = \"responses\"\n\n# API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\nexperimental_bearer_token = %q\n" $litBase $litKey) $out -}}
+{{- $out = replaceAllRegex `(?s)\[model_providers\.ZAI\].*?experimental_bearer_token = "[^"]*"\n` (printf "# URL / API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\n[model_providers.litellm]\nname = \"litellm\"\nbase_url = %q\nwire_api = \"responses\"\n# ネイティブ standalone web search ツールを provider 能力として宣言する。\n# (gateway 側が対応しない場合は検索実行時に失敗する)\nsupports_standalone_web_search = true\n\n# API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\nexperimental_bearer_token = %q\n" $litBase $litKey) $out -}}
 {{- /* 3. experimental_bearer_token / litellm base_url の毎回再展開 (ローテ対応) */ -}}
 {{- $out = replaceAllRegex `(?m)^experimental_bearer_token = ".*"$` (printf "experimental_bearer_token = %q" $litKey) $out -}}
 {{- $out = replaceAllRegex `(?m)^base_url = "https://litellm[^"]*"$` (printf "base_url = %q" $litBase) $out -}}
@@ -53,6 +53,10 @@
 {{- $out = replaceAllRegex `(?m)^web_search = ".*"$` "web_search = \"live\"" $out -}}
 {{- if not (contains "web_search = " $out) -}}
 {{- $out = replaceAllRegex `(?m)^model_reasoning_effort = ".*"$` (printf "model_reasoning_effort = %q\nweb_search = \"live\"" "high") $out -}}
+{{- end -}}
+{{- /* 4b. provider capability: standalone web search (未設定なら wire_api 行の直後に挿入) */ -}}
+{{- if not (contains "supports_standalone_web_search" $out) -}}
+{{- $out = replaceAllRegex `(?m)^wire_api = "responses"$` "wire_api = \"responses\"\nsupports_standalone_web_search = true" $out -}}
 {{- end -}}
 {{- /* 5. mcp_servers.mcps のコメント / url / Bearer を LiteLLM へ */ -}}
 {{- $out = replaceAllRegex `(?s)# lapis-mcp \(リモート MCP server / streamable HTTP\)。\n.*?実行しない\)\n` "# LiteLLM gateway リモート MCP server (streamable HTTP, /mcp)。\n# server名 \"mcps\" は opencode 構成と整合するため維持。\n# Bearer トークンは chezmoi apply 時に平文展開する。\n# (Codex 起動時に 1Password CLI / helper を実行しない)\n" $out -}}
