@@ -1,12 +1,23 @@
 {{- /* chezmoi:modify-template */ -}}
 {{- /*
-  Codex 設定ディスパッチャ (modify テンプレート)。
+  個人PC版 ~/.codex/config.toml の内容変更 (modify テンプレート)。
 
   ~/.codex/config.toml は ChatGPT デスクトップアプリ / Codex CLI が実行時に
   書き換える ([projects] / [plugins] / [tui] / [desktop] / notify /
   mcp_servers.node_repl 等を動的に追加する) ため、通常のテンプレートによる
   全量上書きはアプリ側の書き込みと衝突する。そこで modify テンプレートで
   既存内容 (.chezmoi.stdin) を保持しつつ必要箇所のみ変更する。
+
+  .chezmoi.stdin に対し、以下を冪等に置換する:
+    1. ヘッダコメントの世代マイグレーション (古形式 → ZAI 形式 → LiteLLM 形式)
+    2. [model_providers.ZAI] ブロック (旧 [ZAI.auth] サブブロック形式含む) →
+       [model_providers.litellm] ブロック
+    3. experimental_bearer_token 行 / base_url 行を 1Password から再展開
+       (キーローテーション対応)
+    4. model_provider / model / default_subagent_model の slug を
+       gateway 登録名 (zai/*) へ切替
+    5. mcp_servers.mcps の url / Authorization を LiteLLM へ切替
+  stdin が空 (新マシン初回適用) なら全量テンプレート codex-personal を出力。
 
   判定基準は .chezmoiignore と同一:
     username が ubuntu / yuuta     → 個人PC版 (.chezmoitemplates/codex-personal-modify)
@@ -15,5 +26,36 @@
 {{- if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) -}}
 {{- includeTemplate "codex-work-modify" . -}}
 {{- else -}}
-{{- includeTemplate "codex-personal-modify" . -}}
+{{- $litKey := onepasswordRead "op://TOKEN/litellm/credential" -}}
+{{- $litUrl := trimSuffix "/" (onepasswordRead "op://TOKEN/litellm/url") -}}
+{{- $litBase := print $litUrl "/v1" -}}
+{{- $litMcp := print $litUrl "/mcp" -}}
+{{- $stdin := .chezmoi.stdin -}}
+{{- if eq $stdin "" -}}
+{{- includeTemplate "codex-personal" . -}}
+{{- else -}}
+{{- $out := $stdin -}}
+{{- /* 1a. 最古世代ヘッダ (キーを平文で持たない運用注記) → ZAI 世代 */ -}}
+{{- $out = replaceAllRegex `(?s)#   - API キーは平文で持たず.*?PATH が絞られるため注意。\n` "#   - API キーは chezmoi apply 時に onepasswordRead で一度だけ解決し、\n#     experimental_bearer_token として平文展開する (Codex 起動時に\n#     1Password CLI を実行しない。mcps の Bearer と同方式)。\n#   - キーをローテーションした場合は chezmoi apply の再実行が必要。\n" $out -}}
+{{- /* 1b. ZAI 世代ヘッダ → LiteLLM 世代ヘッダ */ -}}
+{{- $out = replaceAllRegex `(?s)# Z\.AI GLM \(Coding Plan\) を model_providers 経由で使う構成\..*?前に置くこと。\n` "# LiteLLM gateway 経由で GLM 等のモデルを使う構成 (OpenAI互換 /v1 + Responses API)。\n# 構文の一次ソース: .opencode/research/codex-cli-config-spec.md\n# 注意:\n#   - API キー/URL は chezmoi apply 時に onepasswordRead で一度だけ解決し、\n#     平文展開する (Codex 起動時に 1Password CLI を実行しない)。\n#   - キーをローテーションした場合は chezmoi apply の再実行が必要。\n#   - TOML 仕様上、トップレベルキーは最初のテーブルヘッダより前に置くこと。\n" $out -}}
+{{- /* 2a. 旧 [model_providers.ZAI.auth] サブブロック形式 → 平文トークン行化 */ -}}
+{{- $out = replaceAllRegex `(?s)# 1Password CLI からトークンを解決.*?refresh_interval_ms = 0\n` (printf "# API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\nexperimental_bearer_token = %q\n" $litKey) $out -}}
+{{- /* 2b. [model_providers.ZAI] ブロック → [model_providers.litellm] ブロック */ -}}
+{{- $out = replaceAllRegex `(?s)\[model_providers\.ZAI\].*?experimental_bearer_token = "[^"]*"\n` (printf "# URL / API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\n[model_providers.litellm]\nname = \"litellm\"\nbase_url = %q\nwire_api = \"responses\"\n\n# API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。\n# (Codex 起動時に op を実行しない)\nexperimental_bearer_token = %q\n" $litBase $litKey) $out -}}
+{{- /* 3. experimental_bearer_token / litellm base_url の毎回再展開 (ローテ対応) */ -}}
+{{- $out = replaceAllRegex `(?m)^experimental_bearer_token = ".*"$` (printf "experimental_bearer_token = %q" $litKey) $out -}}
+{{- $out = replaceAllRegex `(?m)^base_url = "https://litellm[^"]*"$` (printf "base_url = %q" $litBase) $out -}}
+{{- /* 4. 接続先 slug の切替 */ -}}
+{{- $out = replaceAllRegex `(?m)^model_provider = "ZAI"$` "model_provider = \"litellm\"" $out -}}
+{{- $out = replaceAllRegex `(?m)^model = "glm-5\.3-flash"$` "model = \"zai/glm-5.3-flash\"" $out -}}
+{{- $out = replaceAllRegex `(?m)^model = "glm-5\.3"$` "model = \"zai/glm-5.3\"" $out -}}
+{{- $out = replaceAllRegex `(?m)^default_subagent_model = "glm-5\.3-flash"$` "default_subagent_model = \"zai/glm-5.3-flash\"" $out -}}
+{{- /* 5. mcp_servers.mcps のコメント / url / Bearer を LiteLLM へ */ -}}
+{{- $out = replaceAllRegex `(?s)# lapis-mcp \(リモート MCP server / streamable HTTP\)。\n.*?実行しない\)\n` "# LiteLLM gateway リモート MCP server (streamable HTTP, /mcp)。\n# server名 \"mcps\" は opencode 構成と整合するため維持。\n# Bearer トークンは chezmoi apply 時に平文展開する。\n# (Codex 起動時に 1Password CLI / helper を実行しない)\n" $out -}}
+{{- $out = replaceAllRegex `(?m)^url = "https://mcp\.lapis-dev\.work/mcp"$` (printf "url = %q" $litMcp) $out -}}
+{{- $out = replaceAllRegex `(?m)^url = "https://litellm[^"]*/mcp"$` (printf "url = %q" $litMcp) $out -}}
+{{- $out = replaceAllRegex `(?m)^http_headers = \{ Authorization = "Bearer [^"]*" \}$` (printf "http_headers = { Authorization = \"Bearer %q\" }" $litKey) $out -}}
+{{- $out -}}
+{{- end -}}
 {{- end -}}

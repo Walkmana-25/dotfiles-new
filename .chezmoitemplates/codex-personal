@@ -1,18 +1,20 @@
 # Codex 設定 — 個人PC版
 #
-# Z.AI GLM (Coding Plan) を model_providers 経由で使う構成。
+# LiteLLM gateway 経由で GLM 等のモデルを使う構成 (OpenAI互換 /v1 + Responses API)。
 # 構文の一次ソース: .opencode/research/codex-cli-config-spec.md
 # 注意:
 #   - { onepasswordRead } / { .chezmoi.homeDir } は chezmoi テンプレート式
 #     (適用時に展開される)。壊さないこと。
-#   - API キーは chezmoi apply 時に onepasswordRead で一度だけ解決し、
-#     experimental_bearer_token として平文展開する (Codex 起動時に
-#     1Password CLI を実行しない。mcps の Bearer と同方式)。
+#   - URL / API キーは chezmoi apply 時に onepasswordRead で一度だけ解決し、
+#     平文展開する (Codex 起動時に 1Password CLI を実行しない)。
 #   - キーをローテーションした場合は chezmoi apply の再実行が必要。
 #   - TOML 仕様上、トップレベルキーは最初のテーブルヘッダより前に置くこと。
 
-model_provider = "ZAI"
-model = "glm-5.3-flash"
+{{- $litKey := onepasswordRead "op://TOKEN/litellm/credential" -}}
+{{- $litUrl := trimSuffix "/" (onepasswordRead "op://TOKEN/litellm/url") }}
+
+model_provider = "litellm"
+model = "zai/glm-5.3-flash"
 model_reasoning_effort = "high"
 auto_compact_token_limit = 120000
 tool_output_token_limit = 4000
@@ -23,7 +25,7 @@ sandbox_mode = "workspace-write"
 approvals_reviewer = "auto_review"
 
 # codex_apps (ChatGPT Apps 連携の組み込み MCP) は ChatGPT 認証 cookie ("biscuit")
-# を要求するため、Z.AI API キー運用では HTTP 451 no_biscuit_no_service で
+# を要求するため、API キー運用では HTTP 451 no_biscuit_no_service で
 # 必ず起動失敗する。使わないので無効化する。
 [features]
 apps = false
@@ -34,31 +36,36 @@ generate_memories = true
 use_memories = true
 disable_on_external_context = false
 
-[model_providers.ZAI]
-name = "ZAI"
-base_url = "https://api.z.ai/api/v1"
+# LiteLLM gateway (lapis-dev)。wire_api = "responses" は gateway 側で
+# chat 上流へのブリッジ対応済み。URL / キーは chezmoi apply 時に
+# 一度だけ 1Password CLI で解決し平文展開。(Codex 起動時に op を実行しない)
+[model_providers.litellm]
+name = "litellm"
+base_url = "{{ $litUrl }}/v1"
 wire_api = "responses"
 
 # API キーは chezmoi apply 時に一度だけ 1Password CLI で解決し平文展開。
 # (Codex 起動時に op を実行しない)
-experimental_bearer_token = "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
+experimental_bearer_token = "{{ $litKey }}"
 
-# lapis-mcp (リモート MCP server / streamable HTTP)。
+# LiteLLM gateway リモート MCP server (streamable HTTP, /mcp)。
 # server名 "mcps" は opencode 構成と整合するため維持。
 # Bearer トークンは chezmoi apply 時に平文展開する。
 # (Codex 起動時に 1Password CLI / helper を実行しない)
 [mcp_servers.mcps]
-url = "{{ onepasswordRead "op://TOKEN/lapis-mcp-1/url" }}"
-http_headers = { Authorization = "Bearer {{ onepasswordRead "op://TOKEN/lapis-mcp-1/credential" }}" }
+url = "{{ $litUrl }}/mcp"
+http_headers = { Authorization = "Bearer {{ $litKey }}" }
 
 [agents]
 enabled = true
-default_subagent_model = "glm-5.3-flash"
+default_subagent_model = "zai/glm-5.3-flash"
 default_subagent_reasoning_effort = "medium"
 
 [desktop]
 followUpQueueMode = "steer"
 usePointerCursors = false
+toys-confetti-enabled = false
+conversationDetailMode = "STEPS_COMMANDS"
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#339cff"
@@ -75,3 +82,50 @@ code = '"Hack Nerd Font Mono"'
 diffAdded = "#40c977"
 diffRemoved = "#fa423e"
 skill = "#ad7bf9"
+
+[tui]
+screen_reader_detection_done = true
+
+[projects."/Users/yuuta/Documents/GitHub/devcontainer-features"]
+trust_level = "trusted"
+
+[projects."/Users/yuuta/Documents/GitHub/Floorp"]
+trust_level = "trusted"
+
+[projects."/Users/yuuta/.local/share/chezmoi"]
+trust_level = "trusted"
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/Users/yuuta/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/Users/yuuta/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"

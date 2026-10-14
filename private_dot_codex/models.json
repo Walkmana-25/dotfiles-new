@@ -1,14 +1,23 @@
 {
   "models": [
     {
-      "slug": "glm-5.3",
-      "display_name": "glm-5.3",
-      "description": "Z.ai's latest flagship model",
+      "slug": "zai/glm-5.3",
+      "display_name": "zai/glm-5.3",
+      "description": "Z.ai flagship GLM model (via LiteLLM gateway)",
       "default_reasoning_level": "max",
       "supported_reasoning_levels": [
-        { "effort": "low",  "description": "Light reasoning" },
-        { "effort": "high", "description": "Enhanced reasoning" },
-        { "effort": "max",  "description": "Deep reasoning" }
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
       ],
       "shell_type": "shell_command",
       "visibility": "list",
@@ -19,23 +28,37 @@
       "default_reasoning_summary": "none",
       "support_verbosity": false,
       "apply_patch_tool_type": "freeform",
-      "truncation_policy": { "mode": "bytes", "limit": 10000 },
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
       "context_window": 1048576,
       "max_context_window": 1048576,
       "effective_context_window_percent": 95,
       "supports_parallel_tool_calls": true,
       "experimental_supported_tools": [],
-      "input_modalities": ["text"]
+      "input_modalities": [
+        "text"
+      ]
     },
     {
-      "slug": "glm-5.3-flash",
-      "display_name": "glm-5.3-flash",
-      "description": "Z.ai fast multimodal model (3x quota on Coding Plan)",
+      "slug": "zai/glm-5.3-flash",
+      "display_name": "zai/glm-5.3-flash",
+      "description": "Z.ai fast GLM model (via LiteLLM gateway)",
       "default_reasoning_level": "high",
       "supported_reasoning_levels": [
-        { "effort": "low",  "description": "Light reasoning" },
-        { "effort": "high", "description": "Enhanced reasoning" },
-        { "effort": "max",  "description": "Deep reasoning" }
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
       ],
       "shell_type": "shell_command",
       "visibility": "list",
@@ -46,13 +69,5348 @@
       "default_reasoning_summary": "none",
       "support_verbosity": false,
       "apply_patch_tool_type": "freeform",
-      "truncation_policy": { "mode": "bytes", "limit": 10000 },
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
       "context_window": 1048576,
       "max_context_window": 1048576,
       "effective_context_window_percent": 95,
       "supports_parallel_tool_calls": true,
       "experimental_supported_tools": [],
-      "input_modalities": ["text"]
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-4.5",
+      "display_name": "zai/glm-4.5",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-4.5-air",
+      "display_name": "zai/glm-4.5-air",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-4.6",
+      "display_name": "zai/glm-4.6",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-4.7",
+      "display_name": "zai/glm-4.7",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-5",
+      "display_name": "zai/glm-5",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-5-turbo",
+      "display_name": "zai/glm-5-turbo",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-5.1",
+      "display_name": "zai/glm-5.1",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-5.2",
+      "display_name": "zai/glm-5.2",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "zai/glm-5.3-flashx",
+      "display_name": "zai/glm-5.3-flashx",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/chat-latest",
+      "display_name": "iniad/chat-latest",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-3.5-turbo",
+      "display_name": "iniad/gpt-3.5-turbo",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-3.5-turbo-0125",
+      "display_name": "iniad/gpt-3.5-turbo-0125",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-3.5-turbo-1106",
+      "display_name": "iniad/gpt-3.5-turbo-1106",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-3.5-turbo-16k",
+      "display_name": "iniad/gpt-3.5-turbo-16k",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-3.5-turbo-instruct",
+      "display_name": "iniad/gpt-3.5-turbo-instruct",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-3.5-turbo-instruct-0914",
+      "display_name": "iniad/gpt-3.5-turbo-instruct-0914",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4",
+      "display_name": "iniad/gpt-4",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4-0613",
+      "display_name": "iniad/gpt-4-0613",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4-turbo",
+      "display_name": "iniad/gpt-4-turbo",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4-turbo-2024-04-09",
+      "display_name": "iniad/gpt-4-turbo-2024-04-09",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4.1",
+      "display_name": "iniad/gpt-4.1",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4.1-2025-04-14",
+      "display_name": "iniad/gpt-4.1-2025-04-14",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4.1-mini",
+      "display_name": "iniad/gpt-4.1-mini",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4.1-mini-2025-04-14",
+      "display_name": "iniad/gpt-4.1-mini-2025-04-14",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4.1-nano",
+      "display_name": "iniad/gpt-4.1-nano",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4.1-nano-2025-04-14",
+      "display_name": "iniad/gpt-4.1-nano-2025-04-14",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o",
+      "display_name": "iniad/gpt-4o",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-2024-05-13",
+      "display_name": "iniad/gpt-4o-2024-05-13",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-2024-08-06",
+      "display_name": "iniad/gpt-4o-2024-08-06",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-2024-11-20",
+      "display_name": "iniad/gpt-4o-2024-11-20",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-mini",
+      "display_name": "iniad/gpt-4o-mini",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-mini-2024-07-18",
+      "display_name": "iniad/gpt-4o-mini-2024-07-18",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-mini-search-preview",
+      "display_name": "iniad/gpt-4o-mini-search-preview",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-mini-search-preview-2025-03-11",
+      "display_name": "iniad/gpt-4o-mini-search-preview-2025-03-11",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-search-preview",
+      "display_name": "iniad/gpt-4o-search-preview",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-4o-search-preview-2025-03-11",
+      "display_name": "iniad/gpt-4o-search-preview-2025-03-11",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 128000,
+      "max_context_window": 128000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5",
+      "display_name": "iniad/gpt-5",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-2025-08-07",
+      "display_name": "iniad/gpt-5-2025-08-07",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-chat-latest",
+      "display_name": "iniad/gpt-5-chat-latest",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-codex",
+      "display_name": "iniad/gpt-5-codex",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-mini",
+      "display_name": "iniad/gpt-5-mini",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-mini-2025-08-07",
+      "display_name": "iniad/gpt-5-mini-2025-08-07",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-nano",
+      "display_name": "iniad/gpt-5-nano",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-nano-2025-08-07",
+      "display_name": "iniad/gpt-5-nano-2025-08-07",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-pro",
+      "display_name": "iniad/gpt-5-pro",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-pro-2025-10-06",
+      "display_name": "iniad/gpt-5-pro-2025-10-06",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-search-api",
+      "display_name": "iniad/gpt-5-search-api",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5-search-api-2025-10-14",
+      "display_name": "iniad/gpt-5-search-api-2025-10-14",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.1",
+      "display_name": "iniad/gpt-5.1",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.1-2025-11-13",
+      "display_name": "iniad/gpt-5.1-2025-11-13",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.1-chat-latest",
+      "display_name": "iniad/gpt-5.1-chat-latest",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.1-codex",
+      "display_name": "iniad/gpt-5.1-codex",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.1-codex-max",
+      "display_name": "iniad/gpt-5.1-codex-max",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.1-codex-mini",
+      "display_name": "iniad/gpt-5.1-codex-mini",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.2",
+      "display_name": "iniad/gpt-5.2",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.2-2025-12-11",
+      "display_name": "iniad/gpt-5.2-2025-12-11",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.2-chat-latest",
+      "display_name": "iniad/gpt-5.2-chat-latest",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.2-codex",
+      "display_name": "iniad/gpt-5.2-codex",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.2-pro",
+      "display_name": "iniad/gpt-5.2-pro",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.2-pro-2025-12-11",
+      "display_name": "iniad/gpt-5.2-pro-2025-12-11",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.3-chat-latest",
+      "display_name": "iniad/gpt-5.3-chat-latest",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.3-codex",
+      "display_name": "iniad/gpt-5.3-codex",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4",
+      "display_name": "iniad/gpt-5.4",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4-2026-03-05",
+      "display_name": "iniad/gpt-5.4-2026-03-05",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4-mini",
+      "display_name": "iniad/gpt-5.4-mini",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4-mini-2026-03-17",
+      "display_name": "iniad/gpt-5.4-mini-2026-03-17",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4-nano",
+      "display_name": "iniad/gpt-5.4-nano",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4-nano-2026-03-17",
+      "display_name": "iniad/gpt-5.4-nano-2026-03-17",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4-pro",
+      "display_name": "iniad/gpt-5.4-pro",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.4-pro-2026-03-05",
+      "display_name": "iniad/gpt-5.4-pro-2026-03-05",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.5",
+      "display_name": "iniad/gpt-5.5",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.5-2026-04-23",
+      "display_name": "iniad/gpt-5.5-2026-04-23",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.5-pro",
+      "display_name": "iniad/gpt-5.5-pro",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.5-pro-2026-04-23",
+      "display_name": "iniad/gpt-5.5-pro-2026-04-23",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.6-luna",
+      "display_name": "iniad/gpt-5.6-luna",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.6-sol",
+      "display_name": "iniad/gpt-5.6-sol",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-5.6-terra",
+      "display_name": "iniad/gpt-5.6-terra",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-6-astra",
+      "display_name": "iniad/gpt-6-astra",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-6-luna",
+      "display_name": "iniad/gpt-6-luna",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-6-sol",
+      "display_name": "iniad/gpt-6-sol",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/gpt-6.1-sol",
+      "display_name": "iniad/gpt-6.1-sol",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o1",
+      "display_name": "iniad/o1",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o1-2024-12-17",
+      "display_name": "iniad/o1-2024-12-17",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o1-pro",
+      "display_name": "iniad/o1-pro",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o1-pro-2025-03-19",
+      "display_name": "iniad/o1-pro-2025-03-19",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o3",
+      "display_name": "iniad/o3",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o3-2025-04-16",
+      "display_name": "iniad/o3-2025-04-16",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o3-mini",
+      "display_name": "iniad/o3-mini",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o3-mini-2025-01-31",
+      "display_name": "iniad/o3-mini-2025-01-31",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o3-pro",
+      "display_name": "iniad/o3-pro",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o3-pro-2025-06-10",
+      "display_name": "iniad/o3-pro-2025-06-10",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o4-mini",
+      "display_name": "iniad/o4-mini",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad/o4-mini-2025-04-16",
+      "display_name": "iniad/o4-mini-2025-04-16",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/cat-jam-free",
+      "display_name": "opencode-go/cat-jam-free",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/claude-haiku-5-5",
+      "display_name": "opencode-go/claude-haiku-5-5",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/deepseek-flash",
+      "display_name": "opencode-go/deepseek-flash",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/deepseek-v4-flash",
+      "display_name": "opencode-go/deepseek-v4-flash",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/deepseek-v4-flash-vision-exp",
+      "display_name": "opencode-go/deepseek-v4-flash-vision-exp",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/deepseek-v4-pro",
+      "display_name": "opencode-go/deepseek-v4-pro",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/deepseek-v4.1-flash",
+      "display_name": "opencode-go/deepseek-v4.1-flash",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/glm-5.1",
+      "display_name": "opencode-go/glm-5.1",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/glm-5.2",
+      "display_name": "opencode-go/glm-5.2",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/glm-5.3",
+      "display_name": "opencode-go/glm-5.3",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/glm-5.3-flash",
+      "display_name": "opencode-go/glm-5.3-flash",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1048576,
+      "max_context_window": 1048576,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/gpt-5.6-luna",
+      "display_name": "opencode-go/gpt-5.6-luna",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 400000,
+      "max_context_window": 400000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/gpt-6-luna",
+      "display_name": "opencode-go/gpt-6-luna",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/grok-4.6",
+      "display_name": "opencode-go/grok-4.6",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/grok-4.7",
+      "display_name": "opencode-go/grok-4.7",
+      "description": "text model (responses) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/hy3",
+      "display_name": "opencode-go/hy3",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/hy4-preview",
+      "display_name": "opencode-go/hy4-preview",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/kimi-k2.6",
+      "display_name": "opencode-go/kimi-k2.6",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/kimi-k2.7-code",
+      "display_name": "opencode-go/kimi-k2.7-code",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/kimi-k3",
+      "display_name": "opencode-go/kimi-k3",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/longcat-2.0",
+      "display_name": "opencode-go/longcat-2.0",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/longcat-2.5-preview-free",
+      "display_name": "opencode-go/longcat-2.5-preview-free",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/mimo-v2.5",
+      "display_name": "opencode-go/mimo-v2.5",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/mimo-v2.5-pro",
+      "display_name": "opencode-go/mimo-v2.5-pro",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/mimo-v2.6-flash",
+      "display_name": "opencode-go/mimo-v2.6-flash",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/mimo-v2.6-pro",
+      "display_name": "opencode-go/mimo-v2.6-pro",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/minimax-m2.5",
+      "display_name": "opencode-go/minimax-m2.5",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/minimax-m2.7",
+      "display_name": "opencode-go/minimax-m2.7",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/minimax-m3",
+      "display_name": "opencode-go/minimax-m3",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/omen-alpha",
+      "display_name": "opencode-go/omen-alpha",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/qwen3.6-plus",
+      "display_name": "opencode-go/qwen3.6-plus",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/qwen3.7-max",
+      "display_name": "opencode-go/qwen3.7-max",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/qwen3.7-plus",
+      "display_name": "opencode-go/qwen3.7-plus",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/qwen3.8-flash",
+      "display_name": "opencode-go/qwen3.8-flash",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/qwen3.8-max",
+      "display_name": "opencode-go/qwen3.8-max",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/space-bunny",
+      "display_name": "opencode-go/space-bunny",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "opencode-go/step-5-preview-free",
+      "display_name": "opencode-go/step-5-preview-free",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 200000,
+      "max_context_window": 200000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
     }
   ]
 }
