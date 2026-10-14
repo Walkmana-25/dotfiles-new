@@ -60,3 +60,18 @@ Codex CLI / ChatGPT デスクトップアプリの接続先を litellm gateway (
   `op://TOKEN/lapis-mcp-1/*`・`zai-api-key` アイテムは削除しない
 - mimo 系 (`opencode-go/mimo-*`, mode: chat) も `/v1/responses` 経由で動作することを
   gateway ブリッジ対応後に確認済み (streaming 200)
+
+## Web Search (gateway ビルトイン経由)
+
+- gateway 側: LiteLLM のビルトイン Web Search (`tools: [{"type": "web_search"}]`) が有効
+- codex 側: config.toml トップレベルに `web_search = "live"` を置く
+  (既定は `"cached"`。`"disabled"` で無効化)。有効化されると codex は Responses
+  リクエストの `tools` 配列に `{"type":"web_search", ...}` を載せて litellm に送る
+- `model_providers.<id>.supports_standalone_web_search` は**設定しない**こと。
+  これは未開発の独立 endpoint (`POST {base_url}/alpha/search`) を使うフラグで、
+  LiteLLM にはその endpoint が存在しない
+- `[tools.web_search]` オブジェクトで `context_size` / `allowed_domains` / `location` が調整可能
+- 動作確認は codex 実行時の gateway 側リクエストログで tools 配列を確認する
+  (カスタム provider + 各モデルでツールが常に付くかは mechanistic 判定が入るため、
+  未付与の場合は model info / カタログ側の要否を gateway ログで特定する)
+

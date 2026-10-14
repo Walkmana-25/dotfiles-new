@@ -50,6 +50,10 @@
 {{- $out = replaceAllRegex `(?m)^model_provider = "ZAI"$` "model_provider = \"litellm\"" $out -}}
 {{- $out = replaceAllRegex `(?m)^model = ".*"$` "model = \"zai/glm-5.3-flash\"" $out -}}
 {{- $out = replaceAllRegex `(?m)^model_reasoning_effort = ".*"$` "model_reasoning_effort = \"high\"" $out -}}
+{{- $out = replaceAllRegex `(?m)^web_search = ".*"$` "web_search = \"live\"" $out -}}
+{{- if not (contains "web_search = " $out) -}}
+{{- $out = replaceAllRegex `(?m)^model_reasoning_effort = ".*"$` (printf "model_reasoning_effort = %q\nweb_search = \"live\"" "high") $out -}}
+{{- end -}}
 {{- /* 5. mcp_servers.mcps のコメント / url / Bearer を LiteLLM へ */ -}}
 {{- $out = replaceAllRegex `(?s)# lapis-mcp \(リモート MCP server / streamable HTTP\)。\n.*?実行しない\)\n` "# LiteLLM gateway リモート MCP server (streamable HTTP, /mcp)。\n# server名 \"mcps\" は opencode 構成と整合するため維持。\n# Bearer トークンは chezmoi apply 時に平文展開する。\n# (Codex 起動時に 1Password CLI / helper を実行しない)\n" $out -}}
 {{- $out = replaceAllRegex `(?m)^url = "https://mcp\.lapis-dev\.work/mcp"$` (printf "url = %q" $litMcp) $out -}}
