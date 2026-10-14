@@ -70,7 +70,7 @@ def get(url: str, headers: dict) -> dict:
 
 
 def context_window(model_id: str) -> int:
-    if "/glm" in model_id:
+    if "glm" in model_id:
         return GLM_CONTEXT
     if re.search(r"gpt-4\.1", model_id):
         return 1_000_000
@@ -84,7 +84,7 @@ def context_window(model_id: str) -> int:
 
 
 def reasoning(model_id: str):
-    if "/glm" in model_id:
+    if "glm" in model_id:
         default = "max" if model_id == "zai/glm-5.3" else "high"
         return default, GLM_LEVELS
     return "medium", GENERIC_LEVELS
@@ -93,9 +93,9 @@ def reasoning(model_id: str):
 def description(model_id: str, mode: str) -> str:
     if model_id == "zai/glm-5.3":
         return "Z.ai flagship GLM model (via LiteLLM gateway)"
-    if model_id == "zai/glm-5.3-flash":
+    if model_id == "zai/glm-5.3-flash" or model_id == "glm-5.3-flash":
         return "Z.ai fast GLM model (via LiteLLM gateway)"
-    if "/glm" in model_id:
+    if "glm" in model_id:
         return "GLM model (via LiteLLM gateway)"
     return f"text model ({mode}) via LiteLLM gateway"
 
