@@ -1,0 +1,33 @@
+# Codex 設定 — dev container 専用
+#
+# host 固有の絶対パス (notify / node_repl / local marketplace / projects) は
+# 意図的に設定しない。container 内では $HOME/.codex を CODEX_HOME として使う。
+#
+# URL / API キーは chezmoi apply 時に 1Password CLI で一度だけ解決し、
+# Codex 起動時には 1Password CLI を実行しない。
+
+{{- $litKey := onepasswordRead "op://TOKEN/litellm/credential" -}}
+{{- $litUrl := trimSuffix "/" (onepasswordRead "op://TOKEN/litellm/url") -}}
+
+model_provider = "litellm"
+model = "opencode-go/mimo-v2.6-flash"
+model_reasoning_effort = "medium"
+web_search = "live"
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+approvals_reviewer = "auto_review"
+
+[features]
+apps = false
+
+[model_providers.litellm]
+name = "litellm"
+base_url = "{{ $litUrl }}/v1"
+wire_api = "responses"
+supports_standalone_web_search = true
+experimental_bearer_token = "{{ $litKey }}"
+
+[mcp_servers.mcps]
+url = "{{ $litUrl }}/mcp"
+http_headers = { Authorization = "Bearer {{ $litKey }}" }
