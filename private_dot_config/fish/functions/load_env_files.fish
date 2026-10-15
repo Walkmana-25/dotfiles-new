@@ -18,9 +18,9 @@ function load_env_files
                         echo "WARNING: Failed to set $var_name from $file" >&2
                     end
                 else if not string match -qr '^\s*$' -- $cleaned
-                    echo "WARNING: Skipping invalid line in $file: $line" >&2
+                    echo "WARNING: Skipping invalid line in $file" >&2
                 end
-            end < "$file" 2>/dev/null
+            end < "$file"
         end
     end
 end

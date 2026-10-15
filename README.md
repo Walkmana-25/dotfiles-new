@@ -32,6 +32,34 @@ commit時に [gitleaks](https://github.com/gitleaks/gitleaks) がステージン
 - 1Passwordテンプレート (`{{ onepasswordRead "op://..." }}`) は偽陽性除外済みです
 - 誤検出の場合は `.gitleaks.toml` の allowlist を編集してください
 
+## 1Password Service Account Token (fish)
+
+fish 起動時に `load_env_files` が `~/.config/.env/*.env` を読み込みます。
+1Password CLI の Service Account Token は、chezmoi/Git 管理外の
+`~/.config/.env/1password.env` に保存してください。
+
+```sh
+umask 077
+mkdir -p "$HOME/.config/.env"
+chmod 700 "$HOME/.config/.env"
+${EDITOR:-vi} "$HOME/.config/.env/1password.env"
+chmod 600 "$HOME/.config/.env/1password.env"
+```
+
+ファイルには次の形式で1行だけ記載します。引用符や `export` は付けません。
+
+```dotenv
+OP_SERVICE_ACCOUNT_TOKEN=<1Password Service Account Token>
+```
+
+- このファイルやトークンを dotfiles、chezmoi のテンプレート、Git に追加しないでください。
+- 読み込まれた環境変数は fish と、そこから起動する子プロセスに継承されます。fish の外から起動したプロセスには渡りません。
+- ファイルがない場合、`OP_SERVICE_ACCOUNT_TOKEN` は設定されず、chezmoi は既存の account mode を使用します。
+- トークンの値を端末やログに出力しないでください。漏えいした場合は 1Password で失効・再発行してください。
+- 認証確認には `op user get --me` を使えます。トークンそのものを表示する必要はありません。
+
+詳細: [Use a service account with the 1Password CLI](https://developer.1password.com/docs/service-accounts/use-with-1password-cli/)
+
 ## setupについてのメモ
 
 ### Macのsudoについて
