@@ -13,8 +13,8 @@
 
 # provider
 model_provider = "litellm"
-model = "opencode-go/mimo-v2.6-flash"
-model_reasoning_effort = "medium"
+model = "autorouter/agent"
+model_reasoning_effort = "high"
 web_search = "live"
 
 approval_policy = "on-request"
@@ -38,5 +38,5 @@ http_headers = { Authorization = "Bearer {{ $litKey }}" }
 
 [agents]
 enabled = true
-default_subagent_model = "zai/glm-5.3-flash"
-default_subagent_reasoning_effort = "medium"
+default_subagent_model = "autorouter/agent"
+default_subagent_reasoning_effort = "high"
