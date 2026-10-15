@@ -34,3 +34,8 @@ experimental_bearer_token = "{{ $litKey }}"
 [mcp_servers.mcps]
 url = "{{ $litUrl }}/mcp"
 http_headers = { Authorization = "Bearer {{ $litKey }}" }
+
+[agents]
+enabled = true
+default_subagent_model = "zai/glm-5.3-flash"
+default_subagent_reasoning_effort = "medium"
