@@ -9,6 +9,9 @@
 {{- $litKey := onepasswordRead "op://TOKEN/litellm/credential" -}}
 {{- $litUrl := trimSuffix "/" (onepasswordRead "op://TOKEN/litellm/url") -}}
 
+
+
+# provider
 model_provider = "litellm"
 model = "opencode-go/mimo-v2.6-flash"
 model_reasoning_effort = "medium"

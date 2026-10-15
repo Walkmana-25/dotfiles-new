@@ -5,11 +5,16 @@ Host iniad-software-exercise
 
 Host workstation
 	User yuuta
-	HostName workstation-vm.taild7790b.ts.net
+	HostName 100.117.76.53
 	ForwardX11 yes
 	RemoteForward 22222 localhost:22
 	RequestTTY yes
 	RemoteCommand fish -i
+
+Host codex-workstation
+	User yuuta
+	HostName 100.117.76.53
+	IdentityFile ~/.ssh/id_ed25519
 
 Host milky-minor
 	User yuuta
