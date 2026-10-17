@@ -29,6 +29,12 @@ global + project の AGENTS.md 合計で 32KiB 制限 (project_doc_max_bytes) �
 
 - 自明な軽作業 (タイポ修正、1-2 行の修正、簡単な質問、git status 確認) は
   委譲せず自分で行う。
+- 委譲の閾値: 3 ファイル以上の編集、またはテスト実行・失敗修正ループを伴う
+  実装は coder に委譲する。委譲時に親が把握済みのファイルパス・要件・既知の
+  事実を渡し、子に再探索させない (再探索はトークンを重複消費する)。
+- テストは独立した tester を作らず coder 内で実行する。フルスイート・回帰も
+  coder に任せ「失敗と要約のみ報告」を明示する。独立検証はリスクの大きい
+  変更のみ reviewer に委譲する。
 - 委譲時は Objective / Output format / Tool & context guidance / Task boundaries
   の 4 点を必ず含める。欠けるとサブエージェントが暴走する。
 - 読み取り系サブエージェントは read-only sandbox で動くが、`find -exec` や

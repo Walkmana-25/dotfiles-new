@@ -47,7 +47,8 @@
 {{- $out = replaceAllRegex `(?m)^experimental_bearer_token = ".*"$` (printf "experimental_bearer_token = %q" $litKey) $out -}}
 {{- $out = replaceAllRegex `(?m)^base_url = "https://litellm[^"]*"$` (printf "base_url = %q" $litBase) $out -}}
 {{- /* 4. 接続先 slug の固定 (gateway 側の選択は codex が config に書込むため、apply 時に既定へ戻す) */ -}}
-{{- $out = replaceAllRegex `(?m)^model_provider = "ZAI"$` "model_provider = \"litellm\"" $out -}}
+{{- /* アプリが書き戻す小文字 "zai" も litellm へ正規化する */ -}}
+{{- $out = replaceAllRegex `(?m)^model_provider = "(?:ZAI|zai)"$` "model_provider = \"litellm\"" $out -}}
 {{- $out = replaceAllRegex `(?m)^model = ".*"$` "model = \"zai/glm-5.3-flash\"" $out -}}
 {{- $out = replaceAllRegex `(?m)^model_reasoning_effort = ".*"$` "model_reasoning_effort = \"high\"" $out -}}
 {{- $out = replaceAllRegex `(?m)^web_search = ".*"$` "web_search = \"live\"" $out -}}
@@ -57,6 +58,13 @@
 {{- /* 4b. provider capability: standalone web search (未設定なら wire_api 行の直後に挿入) */ -}}
 {{- if not (contains "supports_standalone_web_search" $out) -}}
 {{- $out = replaceAllRegex `(?m)^wire_api = "responses"$` "wire_api = \"responses\"\nsupports_standalone_web_search = true" $out -}}
+{{- end -}}
+{{- /* 4c. ad-hoc サブエージェント既定 effort を medium に固定 (トークン削減。
+       名前付き agent (~/.codex/agents/*.toml) は各自上書きするため影響しない) */ -}}
+{{- if contains "default_subagent_reasoning_effort" $out -}}
+{{- $out = replaceAllRegex `(?m)^default_subagent_reasoning_effort = ".*"$` "default_subagent_reasoning_effort = \"medium\"" $out -}}
+{{- else if contains "default_subagent_model" $out -}}
+{{- $out = replaceAllRegex `(?m)^default_subagent_model = ".*"$` "default_subagent_model = \"autorouter/agent\"\ndefault_subagent_reasoning_effort = \"medium\"" $out -}}
 {{- end -}}
 {{- /* 5. mcp_servers.mcps のコメント / url / Bearer を LiteLLM へ */ -}}
 {{- $out = replaceAllRegex `(?s)# lapis-mcp \(リモート MCP server / streamable HTTP\)。\n.*?実行しない\)\n` "# LiteLLM gateway リモート MCP server (streamable HTTP, /mcp)。\n# server名 \"mcps\" は opencode 構成と整合するため維持。\n# Bearer トークンは chezmoi apply 時に平文展開する。\n# (Codex 起動時に 1Password CLI / helper を実行しない)\n" $out -}}
