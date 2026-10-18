@@ -21,13 +21,29 @@ Codex CLI / ChatGPT デスクトップアプリの接続先を litellm gateway (
 
 ## モデルカタログの再生成 (gateway 側の登録が変わったとき)
 
-1. `python3 scripts/gen-codex-model-catalog.py`
+1. gateway 側に新しい limits が入ったか確認する (`GET /model/info` の
+   `model_info.max_input_tokens`)。未反映なら litellm-model-sync CronJob を
+   手動実行してから次へ進む
+   (`kubectl -n litellm create job --from=cronjob/litellm-model-sync <name>`)
+2. `python3 scripts/gen-codex-model-catalog.py`
    - `/v1/models` + `/model/info` (GET のみ) を取得して `private_dot_codex/models.json` / `private_dot_codex-container/models.json` を再生成
    - 非テキスト系を除外 (tts / whisper / embedding / image / sora / realtime /
      moderation / computer-use / deep-research / テスト用 `t-*` など)
-   - GLM 系 (裸名エイリアス含む) は ZAI 由来の属性を踏襲 (1M context / low-high-max)
+   - `context_window` は `/model/info` の `model_info.max_input_tokens` を優先する。
+     gateway 側 (litellm-model-sync CronJob) が models.dev から
+     `max_input_tokens` / `max_output_tokens` を取り込んで deployment の
+     `model_info` に書いているため、モデルごとの実値がそのまま入る
+   - 実値が無いモデルだけ従来のヒューリスティックに落ちる
+     (GLM 系 1M / gpt-5 系 400k / 不明は保守的に 200k)
+   - limits を持たない auto-router グループ (`autorouter/agent` 等) は、
+     `complexity_router_config` の tier / default_model が参照するモデルの
+     limits の最小値を `context_window` に使う (gateway 側が返さないぶんを
+     クライアントで導出。例: autorouter/agent → 1,000,000)
+   - codex のカタログは `context_window` / `max_context_window` しか持たないため、
+     output トークン上限はクライアント側には反映されない (gateway 側の情報のみ)
+   - GLM 系 (裸名エイリアス含む) は ZAI 由来の reasoning 属性を踏襲 (low-high-max)
    - 登録数は gateway 側の入れ替えで大きく変動する (実際に 193 → 132 → 7 が発生)
-2. `chezmoi apply ~/.codex/models.json ~/.codex-container/models.json`
+3. `chezmoi apply ~/.codex/models.json ~/.codex-container/models.json`
 
 ## トラブルシュート実績
 

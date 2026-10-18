@@ -9,6 +9,10 @@ private_dot_codex-container/models.json) を再生成するスクリプト。
   (op の実行はユーザー承認ダイアログが出ることがある)
 - テキスト系モデルのみフィルタ (tts / audio / image / embedding / realtime /
   moderation / computer-use / deep-research / テスト用 t-* 等を除外)
+- context_window は /model/info の model_info.max_input_tokens を優先する
+  (gateway がモデルごとの実値を返す。無い場合のみ下のヒューリスティック)
+- limits を持たない auto-router グループ (complexity_router_config) は、
+  tier / default_model が参照するモデルの limits の最小値を context_window に使う
 - カタログ属性は既存 entries (ZAI 由来) の shape を踏襲する
 
 gateway 側のモデル登録が変わったら本スクリプトを再実行して
@@ -38,7 +42,8 @@ EXCLUDE = re.compile(
     re.I,
 )
 
-# glm 系ごとのカタログ属性 (既存 ZAI カタログの踏襲)
+# glm 系ごとのカタログ属性 (既存 ZAI カタログの踏襲)。
+# GLM_CONTEXT は gateway が context を返さなかったときのフォールバック。
 GLM_CONTEXT = 1048576
 GLM_LEVELS = [
     {"effort": "low", "description": "Light reasoning"},
@@ -126,7 +131,15 @@ def model_ids(payload: dict, endpoint: str) -> list[str]:
     return ids
 
 
-def context_window(model_id: str) -> int:
+def context_window(model_id: str, reported: int | None = None) -> int:
+    """context_window を決める。
+
+    gateway (/model/info の model_info.max_input_tokens) が実値を返せばそれを使う。
+    返さないモデル (models.dev にも gateway の limits.json にも無いもの) だけ
+    下のヒューリスティックに落ちる。
+    """
+    if isinstance(reported, int) and reported > 0:
+        return reported
     if "glm" in model_id:
         return GLM_CONTEXT
     if re.search(r"gpt-4\.1", model_id):
@@ -192,6 +205,40 @@ def main() -> None:
     def mode_of(mid: str) -> str:
         return ((info.get(mid) or {}).get("model_info") or {}).get("mode") or "chat"
 
+    def reported_context(mid: str) -> int | None:
+        """gateway が公開している max_input_tokens (未設定なら None)。"""
+        value = ((info.get(mid) or {}).get("model_info") or {}).get("max_input_tokens")
+        return value if isinstance(value, int) and value > 0 else None
+
+    def router_context(mid: str) -> int | None:
+        """auto-router グループ (complexity_router_config) の context_window。
+
+        tier / default_model が参照するモデルの limits のうち最小のものを使う。
+        tier 名は通常のモデル ID (opencode-go/...) か、ルーターが tier 用に作る
+        alias グループ (routing/...) なので、完全一致で引けなければモデル名の
+        末尾で照合する。1つも解決できなければ None (通常のフォールバックへ)。
+        """
+        params = (info.get(mid) or {}).get("litellm_params") or {}
+        config = params.get("complexity_router_config") or {}
+        names = [config.get("default_model")]
+        for members in (config.get("tiers") or {}).values():
+            names.extend(members or [])
+        windows = []
+        for name in filter(None, names):
+            window = reported_context(name)
+            if window is None:
+                tail = name.split("/", 1)[-1]
+                matches = [
+                    reported_context(other)
+                    for other in ids
+                    if other.split("/", 1)[-1] == tail
+                ]
+                matches = [value for value in matches if value]
+                window = min(matches) if matches else None
+            if window:
+                windows.append(window)
+        return min(windows) if windows else None
+
     entries = []
     kept.sort(
         key=lambda mid: (
@@ -203,7 +250,7 @@ def main() -> None:
     for mid in kept:
         mode = mode_of(mid)
         default_level, levels = reasoning(mid)
-        ctx = context_window(mid)
+        ctx = context_window(mid, reported_context(mid) or router_context(mid))
         entries.append(
             {
                 "slug": mid,
