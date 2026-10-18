@@ -32,6 +32,54 @@ commit時に [gitleaks](https://github.com/gitleaks/gitleaks) がステージン
 - 1Passwordテンプレート (`{{ onepasswordRead "op://..." }}`) は偽陽性除外済みです
 - 誤検出の場合は `.gitleaks.toml` の allowlist を編集してください
 
+## Codex model catalog の更新
+
+`~/.codex/models.json` および `~/.codex-container/models.json` の元になる
+chezmoi ソース (`private_dot_codex/models.json` /
+`private_dot_codex-container/models.json`) は手編集せず、
+1Password CLI + LiteLLM gateway から自動生成します。
+
+### 前提
+
+- `op` (1Password CLI) が使えること
+- vault `TOKEN` / item `litellm` に `url` と `credential` field があること
+- Service Account Token を使う場合は `OP_SERVICE_ACCOUNT_TOKEN` が設定済みのこと
+  (fish から起動すれば `~/.config/.env/1password.env` 経由で読み込まれる)
+
+### 実行方法
+
+LiteLLM gateway 側でモデル登録が変わったら、次のコマンドでカタログを
+再生成します:
+
+```sh
+python3 scripts/gen-codex-model-catalog.py
+```
+
+スクリプトの動作:
+
+- `op` から `litellm` アイテムの `url` / `credential` を取得する
+  (初回に 1Password の認証ダイアログが出ることがあります)
+- `GET {url}/v1/models` と `GET {url}/model/info` のみを叩いて最新の
+  モデル一覧を取得する
+- テキスト系モデル以外 (tts / audio / embedding / image / realtime /
+  moderation / deep-research / テスト用モデル等) を除外する
+- `private_dot_codex/models.json` と
+  `private_dot_codex-container/models.json` に同一カタログを書き出す
+
+生成後は chezmoi apply で `~/.codex/models.json` /
+`~/.codex-container/models.json` へ反映します:
+
+```sh
+chezmoi diff ~ | grep -vE 'Bearer|experimental_bearer'   # secret を除外して差分確認
+chezmoi apply
+```
+
+反映後は codex (CLI / ChatGPT デスクトップアプリ) を再起動してください。
+`models.json` は起動時に読み込まれ、ホットリロードされません。
+
+詳細な接続設定・トラブルシュートは
+[docs/litellm-codex-setup.md](docs/litellm-codex-setup.md) を参照してください。
+
 ## 1Password Service Account Token (fish)
 
 fish 起動時に `load_env_files` が `~/.config/.env/*.env` を読み込みます。

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """LiteLLM gateway の /v1/models + /model/info から codex の
-model catalog (~/.codex/models.json / chezmoi ソース: private_dot_codex/models.json)
-を再生成するスクリプト。
+model catalog (chezmoi ソース: private_dot_codex/models.json と
+private_dot_codex-container/models.json) を再生成するスクリプト。
 
   python3 scripts/gen-codex-model-catalog.py
 
@@ -24,7 +24,10 @@ import urllib.request
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-OUT = REPO / "private_dot_codex" / "models.json"
+OUTPUTS = [
+    REPO / "private_dot_codex" / "models.json",
+    REPO / "private_dot_codex-container" / "models.json",
+]
 OP_ITEM = "litellm"
 OP_VAULT = "TOKEN"
 
@@ -51,22 +54,76 @@ GENERIC_LEVELS = [
 
 
 def op_field(field: str) -> str:
-    return subprocess.run(
-        ["op", "item", "get", OP_ITEM, "--vault", OP_VAULT, "--fields", field, "--reveal"],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
+    """Read one field from the 1Password item without printing its value."""
+    cmd = [
+        "op",
+        "item",
+        "get",
+        OP_ITEM,
+        "--vault",
+        OP_VAULT,
+        "--fields",
+        field,
+        "--reveal",
+    ]
+
+    try:
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+        )
+    except FileNotFoundError:
+        sys.exit("`op` command not found. Install the 1Password CLI first.")
+
+    if result.returncode != 0:
+        detail = (result.stderr or result.stdout).strip()
+        raise RuntimeError(
+            f"op item get failed (vault={OP_VAULT}, item={OP_ITEM}, "
+            f"field={field}): {detail or result.returncode}"
+        )
+
+    value = result.stdout.strip()
+    if not value:
+        raise RuntimeError(
+            f"op field is empty (vault={OP_VAULT}, item={OP_ITEM}, field={field})"
+        )
+    return value
 
 
 def get(url: str, headers: dict) -> dict:
-    # Some gateways reject requests without a browser-like User-Agent.
-    req = urllib.request.Request(url, headers={"User-Agent": "codex-catalog-gen/1.0", **headers})
+    """Fetch a LiteLLM JSON endpoint using GET only."""
+    # LiteLLM gateways may reject requests without a browser-like User-Agent.
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "codex-catalog-gen/1.0", **headers},
+    )
+
     try:
         with urllib.request.urlopen(req, timeout=30) as res:
             return json.load(res)
     except urllib.error.HTTPError as e:
-        sys.exit(f"{e.code} {e.reason} for {url}")
+        body = e.read().decode(errors="replace").strip()
+        raise RuntimeError(f"GET {url} failed: HTTP {e.code} {body}") from e
+    except (urllib.error.URLError, TimeoutError) as e:
+        raise RuntimeError(f"GET {url} failed: {e.reason}") from e
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"GET {url} returned invalid JSON") from e
+
+
+def model_ids(payload: dict, endpoint: str) -> list[str]:
+    if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
+        raise RuntimeError(f"{endpoint} returned an unexpected JSON shape")
+
+    ids = []
+    for item in payload["data"]:
+        if isinstance(item, dict) and isinstance(item.get("id"), str):
+            if model_id := item["id"].strip():
+                ids.append(model_id)
+
+    if not ids:
+        raise RuntimeError(f"{endpoint} returned no model ids")
+    return ids
 
 
 def context_window(model_id: str) -> int:
@@ -110,10 +167,20 @@ def priority(model_id: str) -> int:
 
 def main() -> None:
     base = op_field("url").rstrip("/")
+    if not base.startswith(("http://", "https://")):
+        raise RuntimeError("The 1Password `url` field must start with http:// or https://")
+
     headers = {"Authorization": "Bearer " + op_field("credential")}
 
-    ids = [m["id"] for m in get(base + "/v1/models", headers)["data"]]
-    info = {m["model_name"]: m for m in get(base + "/model/info", headers)["data"]}
+    ids = model_ids(get(base + "/v1/models", headers), "/v1/models")
+    info_response = get(base + "/model/info", headers)
+    if not isinstance(info_response, dict) or not isinstance(info_response.get("data"), list):
+        raise RuntimeError("/model/info returned an unexpected JSON shape")
+
+    info = {}
+    for item in info_response["data"]:
+        if isinstance(item, dict) and isinstance(item.get("model_name"), str):
+            info[item["model_name"]] = item
 
     kept, dropped = [], []
     for mid in ids:
@@ -163,10 +230,21 @@ def main() -> None:
             }
         )
 
-    OUT.write_text(json.dumps({"models": entries}, indent=2, ensure_ascii=False) + "\n")
-    print(f"kept: {len(kept)} models -> {OUT}")
+    if not entries:
+        raise RuntimeError("No text models remained after filtering; left models.json unchanged")
+
+    payload = json.dumps({"models": entries}, indent=2, ensure_ascii=False) + "\n"
+    for out in OUTPUTS:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        tmp = out.with_name(out.name + ".tmp")
+        tmp.write_text(payload, encoding="utf-8")
+        tmp.replace(out)
+        print(f"kept: {len(kept)} models -> {out}")
     print(f"dropped (non-text / test): {len(dropped)}")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (RuntimeError, OSError) as e:
+        sys.exit(f"error: {e}")

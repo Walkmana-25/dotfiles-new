@@ -16,18 +16,18 @@ Codex CLI / ChatGPT デスクトップアプリの接続先を litellm gateway (
     (server名 `mcps` は opencode 構成と整合のため維持)
 - 1Password: vault `TOKEN` / item `litellm` / fields `credential` と `url`
   (url はベースURL・末尾スラッシュあり — テンプレート側で trim して `/v1` `/mcp` を付与)
-- モデルカタログ: `private_dot_codex/models.json` ← 自動生成
+- モデルカタログ: `private_dot_codex/models.json` / `private_dot_codex-container/models.json` ← 自動生成
   (`scripts/gen-codex-model-catalog.py`)。**手編集しない**
 
 ## モデルカタログの再生成 (gateway 側の登録が変わったとき)
 
 1. `python3 scripts/gen-codex-model-catalog.py`
-   - `/v1/models` + `/model/info` (GET のみ) を取得して `private_dot_codex/models.json` を再生成
+   - `/v1/models` + `/model/info` (GET のみ) を取得して `private_dot_codex/models.json` / `private_dot_codex-container/models.json` を再生成
    - 非テキスト系を除外 (tts / whisper / embedding / image / sora / realtime /
      moderation / computer-use / deep-research / テスト用 `t-*` など)
    - GLM 系 (裸名エイリアス含む) は ZAI 由来の属性を踏襲 (1M context / low-high-max)
    - 登録数は gateway 側の入れ替えで大きく変動する (実際に 193 → 132 → 7 が発生)
-2. `chezmoi apply ~/.codex/models.json`
+2. `chezmoi apply ~/.codex/models.json ~/.codex-container/models.json`
 
 ## トラブルシュート実績
 
