@@ -29,16 +29,30 @@ Codex CLI / ChatGPT デスクトップアプリの接続先を litellm gateway (
    - `/v1/models` + `/model/info` (GET のみ) を取得して `private_dot_codex/models.json` / `private_dot_codex-container/models.json` を再生成
    - 非テキスト系を除外 (tts / whisper / embedding / image / sora / realtime /
      moderation / computer-use / deep-research / テスト用 `t-*` など)
-   - `context_window` は `/model/info` の `model_info.max_input_tokens` を優先する。
+   - `context_window` は `/v1/models` の `max_input_tokens` を優先する。
      gateway 側 (litellm-model-sync CronJob) が models.dev から
      `max_input_tokens` / `max_output_tokens` を取り込んで deployment の
      `model_info` に書いているため、モデルごとの実値がそのまま入る
    - 実値が無いモデルだけ従来のヒューリスティックに落ちる
      (GLM 系 1M / gpt-5 系 400k / 不明は保守的に 200k)
+   - `/v1/models` が limits を返さない仮想グループは `/router/settings` の
+     `routing_groups` からメンバーを引き、メンバーの limits の最小値を使う
+     (例: routing/opencode-free → 1,000,000。`/model_group/info` の
+     max_input_tokens はメンバー間の最大値なので使わない)
+   - カタログに載せるモデル一覧 (roster) は通常キーの `/v1/models` で決める。
+     ただし仮想グループのメンバーは通常キーから見えないことがあるため、
+     limits と routing group は admin キーのビューで補う (roster は変えない)
+   - `/router/settings` は admin キーが必要。1Password の
+     `litellm-model-read` アイテムの `credential` フィールド
+     (team なし、`/v1/models` / `/model/info` / `/router/settings` のみ許可)
+     を使い、無ければ通常キーで試して 403 なら admin ビューを諦め、
+     呼び出し元ビュー + ヒューリスティックにフォールバックする
+   - 1Password CLI が無い環境では `LITELLM_URL` / `LITELLM_API_KEY` で接続先を、
+     `LITELLM_ADMIN_KEY` で admin キーを環境変数から渡せる
    - limits を持たない auto-router グループ (`autorouter/agent` 等) は、
      `complexity_router_config` の tier / default_model が参照するモデルの
-     limits の最小値を `context_window` に使う (gateway 側が返さないぶんを
-     クライアントで導出。例: autorouter/agent → 1,000,000)
+     limits の最小値を `context_window` に使う (tier が routing group でも
+     再帰的に解決。例: autorouter/agent → 1,000,000)
    - codex のカタログは `context_window` / `max_context_window` しか持たないため、
      output トークン上限はクライアント側には反映されない (gateway 側の情報のみ)
    - GLM 系 (裸名エイリアス含む) は ZAI 由来の reasoning 属性を踏襲 (low-high-max)
