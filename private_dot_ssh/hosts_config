@@ -31,3 +31,9 @@ Host x510
 Host openclaw
 	user ubuntu
 	HostName 100.103.181.100
+
+Host k3s
+	user ubuntu
+	HostName k3s-ansible.vm.cloud-milky.solufit.net 
+	RemoteForward 22222 localhost:22
+	
