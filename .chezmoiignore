@@ -28,6 +28,7 @@
 # (社用PC の codex-work は ollama を使い Z.AI 関連を参照しないため不要)
 {{ if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) }}
 .codex/models.json
+.codex-container/models.json
 .codex/flash.config.toml
 {{ end }}
 

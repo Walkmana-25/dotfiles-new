@@ -3,6 +3,13 @@
 # host 固有の絶対パス (notify / node_repl / local marketplace / projects) は
 # 意図的に設定しない。container 内では $HOME/.codex を CODEX_HOME として使う。
 #
+{{- if not (or (eq .chezmoi.username "ubuntu") (eq .chezmoi.username "yuuta")) -}}
+{{- /*
+  社用PC版は ~/.codex と同じく ollama 前提とし、
+  1Password CLI / op:// 参照を一切使わない。
+*/ -}}
+{{ includeTemplate "codex-work" . }}
+{{- else -}}
 # URL / API キーは chezmoi apply 時に 1Password CLI で一度だけ解決し、
 # Codex 起動時には 1Password CLI を実行しない。
 
@@ -40,3 +47,4 @@ http_headers = { Authorization = "Bearer {{ $litKey }}" }
 enabled = true
 default_subagent_model = "autorouter/agent"
 default_subagent_reasoning_effort = "medium"
+{{- end -}}
