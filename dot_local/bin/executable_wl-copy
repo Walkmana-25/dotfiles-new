@@ -1,0 +1,60 @@
+#!/bin/sh
+# macOS / Linux で同じ wl-copy interface を使うための wrapper。
+# 引数なし: stdin を clipboard へ copy
+# 引数あり: 引数を連結して copy
+
+set -eu
+
+have_args=false
+if [ "$#" -gt 0 ]; then
+    have_args=true
+    text=$(printf '%s\n' "$*")
+fi
+
+copy_with_stdin() {
+    if [ "$have_args" = true ]; then
+        printf '%s' "$text" | "$@"
+    else
+        "$@"
+    fi
+}
+
+case "$(uname -s)" in
+    Darwin)
+        if [ "$have_args" = true ]; then
+            printf '%s' "$text" | pbcopy
+        else
+            exec pbcopy
+        fi
+        ;;
+    Linux)
+        if command -v wl-copy >/dev/null 2>&1; then
+            real_wl_copy=$(command -v wl-copy)
+            self=$0
+            case $self in
+                /*) ;;
+                *) self=$PWD/$self ;;
+            esac
+            resolved_self=$(readlink -f "$self" 2>/dev/null || printf '%s' "$self")
+            resolved_real=$(readlink -f "$real_wl_copy" 2>/dev/null || printf '%s' "$real_wl_copy")
+            if [ "$resolved_self" != "$resolved_real" ]; then
+                exec "$real_wl_copy" "$@"
+            fi
+        fi
+
+        if command -v xclip >/dev/null 2>&1; then
+            copy_with_stdin xclip -selection clipboard -in
+        elif command -v xsel >/dev/null 2>&1; then
+            copy_with_stdin xsel --clipboard --input
+        elif command -v clip.exe >/dev/null 2>&1; then
+            copy_with_stdin clip.exe
+        else
+            echo "wl-copy: clipboard command not found (wl-copy, xclip, xsel, clip.exe)" >&2
+            exit 127
+        fi
+        ;;
+    *)
+        echo "wl-copy: unsupported platform: $(uname -s)" >&2
+        exit 1
+        ;;
+esac

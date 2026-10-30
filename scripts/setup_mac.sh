@@ -34,6 +34,7 @@ PACKAGES=(
     gitleaks
     htop
     lazygit
+    zellij
     lsd
     neovim
     ripgrep

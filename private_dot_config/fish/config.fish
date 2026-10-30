@@ -1,31 +1,7 @@
 set -x LANG ja_JP.utf8
 set -x ELECTRON_OZONE_PLATFORM_HINT auto
 
-if status is-interactive
-    # すでにtmux内、またはSSH接続時はスキップ
-    if not set -q TMUX; and not set -q SSH_TTY
-
-        # OSに応じてtmuxのパスを特定
-        set -l tmux_path ""
-        switch (uname)
-            case Darwin # Macの場合
-                if test -f /opt/homebrew/bin/tmux
-                    set tmux_path /opt/homebrew/bin/tmux # Apple Silicon
-                else if test -f /usr/local/bin/tmux
-                    set tmux_path /usr/local/bin/tmux     # Intel Mac
-                else
-                    set tmux_path (which tmux)            # その他
-                end
-            case Linux # Linuxの場合
-                set tmux_path (which tmux)
-        end
-
-        # tmuxのパスが有効で、実行可能であれば起動
-        if test -n "$tmux_path"; and test -x "$tmux_path"
-            exec $tmux_path
-        end
-    end
-end
+# tmux auto-start is intentionally disabled.
 
 # setup fisher plugin manager
 setup_fisher
