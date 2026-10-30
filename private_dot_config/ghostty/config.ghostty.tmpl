@@ -1,32 +1,32 @@
-{{- $tmux := lookPath "tmux" -}}
+{{- $zellij := lookPath "zellij" -}}
 
 {{- /* lookPathが相対パスを返した場合は使わない */ -}}
-{{- if and $tmux (ne (printf "%.1s" $tmux) "/") -}}
-  {{- $tmux = "" -}}
+{{- if and $zellij (ne (printf "%.1s" $zellij) "/") -}}
+  {{- $zellij = "" -}}
 {{- end -}}
 
 {{- /* PATH解決できない場合のOS/arch別フォールバック */ -}}
-{{- if not $tmux -}}
+{{- if not $zellij -}}
   {{- if eq .chezmoi.os "darwin" -}}
     {{- if eq .chezmoi.arch "arm64" -}}
-      {{- $tmux = "/opt/homebrew/bin/tmux" -}}
+      {{- $zellij = "/opt/homebrew/bin/zellij" -}}
     {{- else if eq .chezmoi.arch "amd64" -}}
-      {{- $tmux = "/usr/local/bin/tmux" -}}
+      {{- $zellij = "/usr/local/bin/zellij" -}}
     {{- end -}}
   {{- else if eq .chezmoi.os "linux" -}}
-    {{- $tmux = "/usr/bin/tmux" -}}
+    {{- $zellij = "/usr/bin/zellij" -}}
   {{- end -}}
 {{- end -}}
 
-{{- if not $tmux -}}
-  {{- fail "tmux not found" -}}
+{{- if not $zellij -}}
+  {{- fail "zellij not found" -}}
 {{- end -}}
 
 font-family = "Hack Nerd Font"
 
 background-opacity = 0.85
 background-blur = true
-term = xterm-256color
+#term = xterm-256color
 
-command = /bin/zsh -c "TERM=xterm-256color {{ $tmux }} new-session -s main-\$(date +%Y%m%d-%H%M%S)"
-# tmux / shell側でキーバインドを管理するため、Ghostty側ではkeybindを設定しない
+command = /bin/zsh -c "{{ $zellij }}"
+# zellij / shell側でキーバインドを管理するため、Ghostty側ではkeybindを設定しない
