@@ -6,6 +6,22 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl b" { SwitchToMode "normal"; }
     }
+    
+    normal {
+        bind "-" { NewPane; SwitchToMode "locked"; }
+        bind "|" { NewPane "right"; SwitchToMode "locked"; }
+        bind "h" { MoveFocus "left"; SwitchToMode "locked";}
+        bind "j" { MoveFocus "down"; SwitchToMode "locked";}
+        bind "k" { MoveFocus "up"; SwitchToMode "locked";}
+        bind "l" { MoveFocus "right"; SwitchToMode "locked";}
+        bind "w" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+        }
+    }
     pane {
         bind "left" { MoveFocus "left"; }
         bind "down" { MoveFocus "down"; }
