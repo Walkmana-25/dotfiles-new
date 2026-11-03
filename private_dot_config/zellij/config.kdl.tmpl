@@ -395,7 +395,8 @@ default_shell "fish"
 // Examples:
 //
 // copy_command "xclip -selection clipboard" // x11
-copy_command "wl-copy"                    // wayland
+{{- $clipboardCommand := printf "%s/.local/bin/wl-copy" .chezmoi.homeDir }}
+copy_command "{{ $clipboardCommand }}"    // portable pbcopy / wl-copy / xclip / xsel wrapper
 // copy_command "pbcopy"                     // osx
 // 
 // copy_command "pbcopy"
