@@ -21,6 +21,10 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "locked"
         }
+        bind "Ctrl h" { GoToPreviousTab; }
+        bind "Ctrl j" { GoToNextTab; }
+        bind "Ctrl k" { GoToPreviousTab; }
+        bind "Ctrl l" { GoToNextTab; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -199,7 +203,7 @@ keybinds clear-defaults=true {
         bind "Alt Shift p" { ToggleGroupMarking; }
     }
     shared_except "locked" "renametab" "renamepane" {
-        bind "Ctrl g" { SwitchToMode "locked"; }
+        bind "Ctrl n" { SwitchToMode "locked"; }
         bind "Ctrl q" { Quit; }
     }
     shared_except "locked" "entersearch" {
