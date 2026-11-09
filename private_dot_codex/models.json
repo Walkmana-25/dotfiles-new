@@ -1,88 +1,6 @@
 {
   "models": [
     {
-      "slug": "zai/glm-5.3",
-      "display_name": "zai/glm-5.3",
-      "description": "Z.ai flagship GLM model (via LiteLLM gateway)",
-      "default_reasoning_level": "max",
-      "supported_reasoning_levels": [
-        {
-          "effort": "low",
-          "description": "Light reasoning"
-        },
-        {
-          "effort": "high",
-          "description": "Enhanced reasoning"
-        },
-        {
-          "effort": "max",
-          "description": "Deep reasoning"
-        }
-      ],
-      "shell_type": "shell_command",
-      "visibility": "list",
-      "supported_in_api": true,
-      "priority": 0,
-      "base_instructions": "",
-      "supports_reasoning_summaries": true,
-      "default_reasoning_summary": "none",
-      "support_verbosity": false,
-      "apply_patch_tool_type": "freeform",
-      "truncation_policy": {
-        "mode": "bytes",
-        "limit": 10000
-      },
-      "context_window": 1000000,
-      "max_context_window": 1000000,
-      "effective_context_window_percent": 95,
-      "supports_parallel_tool_calls": true,
-      "experimental_supported_tools": [],
-      "input_modalities": [
-        "text"
-      ]
-    },
-    {
-      "slug": "zai/glm-5.3-flash",
-      "display_name": "zai/glm-5.3-flash",
-      "description": "Z.ai fast GLM model (via LiteLLM gateway)",
-      "default_reasoning_level": "high",
-      "supported_reasoning_levels": [
-        {
-          "effort": "low",
-          "description": "Light reasoning"
-        },
-        {
-          "effort": "high",
-          "description": "Enhanced reasoning"
-        },
-        {
-          "effort": "max",
-          "description": "Deep reasoning"
-        }
-      ],
-      "shell_type": "shell_command",
-      "visibility": "list",
-      "supported_in_api": true,
-      "priority": 1,
-      "base_instructions": "",
-      "supports_reasoning_summaries": true,
-      "default_reasoning_summary": "none",
-      "support_verbosity": false,
-      "apply_patch_tool_type": "freeform",
-      "truncation_policy": {
-        "mode": "bytes",
-        "limit": 10000
-      },
-      "context_window": 1000000,
-      "max_context_window": 1000000,
-      "effective_context_window_percent": 95,
-      "supports_parallel_tool_calls": true,
-      "experimental_supported_tools": [],
-      "input_modalities": [
-        "text"
-      ]
-    },
-    {
       "slug": "autorouter/agent",
       "display_name": "autorouter/agent",
       "description": "text model (chat) via LiteLLM gateway",
@@ -114,8 +32,8 @@
         "mode": "bytes",
         "limit": 10000
       },
-      "context_window": 1000000,
-      "max_context_window": 1000000,
+      "context_window": 262144,
+      "max_context_window": 262144,
       "effective_context_window_percent": 95,
       "supports_parallel_tool_calls": true,
       "experimental_supported_tools": [],
@@ -124,22 +42,63 @@
       ]
     },
     {
-      "slug": "glm-5.3-flash",
-      "display_name": "glm-5.3-flash",
-      "description": "Z.ai fast GLM model (via LiteLLM gateway)",
-      "default_reasoning_level": "high",
+      "slug": "batch",
+      "display_name": "batch",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
       "supported_reasoning_levels": [
         {
           "effort": "low",
           "description": "Light reasoning"
         },
         {
-          "effort": "high",
-          "description": "Enhanced reasoning"
+          "effort": "medium",
+          "description": "Standard reasoning"
         },
         {
-          "effort": "max",
-          "description": "Deep reasoning"
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 922000,
+      "max_context_window": 922000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "complex",
+      "display_name": "complex",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
         }
       ],
       "shell_type": "shell_command",
@@ -198,6 +157,47 @@
       },
       "context_window": 131072,
       "max_context_window": 131072,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "iniad-claude/claude-sonnet-5-5",
+      "display_name": "iniad-claude/claude-sonnet-5-5",
+      "description": "text model (chat) via LiteLLM gateway",
+      "default_reasoning_level": "medium",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "medium",
+          "description": "Standard reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
       "effective_context_window_percent": 95,
       "supports_parallel_tool_calls": true,
       "experimental_supported_tools": [],
@@ -288,49 +288,8 @@
       ]
     },
     {
-      "slug": "opencode-go/deepseek-v4.1-flash",
-      "display_name": "opencode-go/deepseek-v4.1-flash",
-      "description": "text model (responses) via LiteLLM gateway",
-      "default_reasoning_level": "medium",
-      "supported_reasoning_levels": [
-        {
-          "effort": "low",
-          "description": "Light reasoning"
-        },
-        {
-          "effort": "medium",
-          "description": "Standard reasoning"
-        },
-        {
-          "effort": "high",
-          "description": "Enhanced reasoning"
-        }
-      ],
-      "shell_type": "shell_command",
-      "visibility": "list",
-      "supported_in_api": true,
-      "priority": 2,
-      "base_instructions": "",
-      "supports_reasoning_summaries": true,
-      "default_reasoning_summary": "none",
-      "support_verbosity": false,
-      "apply_patch_tool_type": "freeform",
-      "truncation_policy": {
-        "mode": "bytes",
-        "limit": 10000
-      },
-      "context_window": 1000000,
-      "max_context_window": 1000000,
-      "effective_context_window_percent": 95,
-      "supports_parallel_tool_calls": true,
-      "experimental_supported_tools": [],
-      "input_modalities": [
-        "text"
-      ]
-    },
-    {
-      "slug": "opencode-go/mimo-v2.6-flash",
-      "display_name": "opencode-go/mimo-v2.6-flash",
+      "slug": "mistral/deepseek-v4-1-flash-1017",
+      "display_name": "mistral/deepseek-v4-1-flash-1017",
       "description": "text model (chat) via LiteLLM gateway",
       "default_reasoning_level": "medium",
       "supported_reasoning_levels": [
@@ -370,8 +329,90 @@
       ]
     },
     {
-      "slug": "opencode-go/mimo-v2.6-pro",
-      "display_name": "opencode-go/mimo-v2.6-pro",
+      "slug": "routing/zai/glm-5.3",
+      "display_name": "routing/zai/glm-5.3",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "routing/zai/glm-5.3-flash",
+      "display_name": "routing/zai/glm-5.3-flash",
+      "description": "GLM model (via LiteLLM gateway)",
+      "default_reasoning_level": "high",
+      "supported_reasoning_levels": [
+        {
+          "effort": "low",
+          "description": "Light reasoning"
+        },
+        {
+          "effort": "high",
+          "description": "Enhanced reasoning"
+        },
+        {
+          "effort": "max",
+          "description": "Deep reasoning"
+        }
+      ],
+      "shell_type": "shell_command",
+      "visibility": "list",
+      "supported_in_api": true,
+      "priority": 2,
+      "base_instructions": "",
+      "supports_reasoning_summaries": true,
+      "default_reasoning_summary": "none",
+      "support_verbosity": false,
+      "apply_patch_tool_type": "freeform",
+      "truncation_policy": {
+        "mode": "bytes",
+        "limit": 10000
+      },
+      "context_window": 1000000,
+      "max_context_window": 1000000,
+      "effective_context_window_percent": 95,
+      "supports_parallel_tool_calls": true,
+      "experimental_supported_tools": [],
+      "input_modalities": [
+        "text"
+      ]
+    },
+    {
+      "slug": "simple",
+      "display_name": "simple",
       "description": "text model (chat) via LiteLLM gateway",
       "default_reasoning_level": "medium",
       "supported_reasoning_levels": [
@@ -401,8 +442,8 @@
         "mode": "bytes",
         "limit": 10000
       },
-      "context_window": 1048576,
-      "max_context_window": 1048576,
+      "context_window": 262144,
+      "max_context_window": 262144,
       "effective_context_window_percent": 95,
       "supports_parallel_tool_calls": true,
       "experimental_supported_tools": [],
@@ -411,90 +452,8 @@
       ]
     },
     {
-      "slug": "routing/glm-5.3",
-      "display_name": "routing/glm-5.3",
-      "description": "GLM model (via LiteLLM gateway)",
-      "default_reasoning_level": "high",
-      "supported_reasoning_levels": [
-        {
-          "effort": "low",
-          "description": "Light reasoning"
-        },
-        {
-          "effort": "high",
-          "description": "Enhanced reasoning"
-        },
-        {
-          "effort": "max",
-          "description": "Deep reasoning"
-        }
-      ],
-      "shell_type": "shell_command",
-      "visibility": "list",
-      "supported_in_api": true,
-      "priority": 2,
-      "base_instructions": "",
-      "supports_reasoning_summaries": true,
-      "default_reasoning_summary": "none",
-      "support_verbosity": false,
-      "apply_patch_tool_type": "freeform",
-      "truncation_policy": {
-        "mode": "bytes",
-        "limit": 10000
-      },
-      "context_window": 1000000,
-      "max_context_window": 1000000,
-      "effective_context_window_percent": 95,
-      "supports_parallel_tool_calls": true,
-      "experimental_supported_tools": [],
-      "input_modalities": [
-        "text"
-      ]
-    },
-    {
-      "slug": "routing/glm-5.3-flash",
-      "display_name": "routing/glm-5.3-flash",
-      "description": "GLM model (via LiteLLM gateway)",
-      "default_reasoning_level": "high",
-      "supported_reasoning_levels": [
-        {
-          "effort": "low",
-          "description": "Light reasoning"
-        },
-        {
-          "effort": "high",
-          "description": "Enhanced reasoning"
-        },
-        {
-          "effort": "max",
-          "description": "Deep reasoning"
-        }
-      ],
-      "shell_type": "shell_command",
-      "visibility": "list",
-      "supported_in_api": true,
-      "priority": 2,
-      "base_instructions": "",
-      "supports_reasoning_summaries": true,
-      "default_reasoning_summary": "none",
-      "support_verbosity": false,
-      "apply_patch_tool_type": "freeform",
-      "truncation_policy": {
-        "mode": "bytes",
-        "limit": 10000
-      },
-      "context_window": 1000000,
-      "max_context_window": 1000000,
-      "effective_context_window_percent": 95,
-      "supports_parallel_tool_calls": true,
-      "experimental_supported_tools": [],
-      "input_modalities": [
-        "text"
-      ]
-    },
-    {
-      "slug": "routing/opencode-free",
-      "display_name": "routing/opencode-free",
+      "slug": "standard",
+      "display_name": "standard",
       "description": "text model (chat) via LiteLLM gateway",
       "default_reasoning_level": "medium",
       "supported_reasoning_levels": [
