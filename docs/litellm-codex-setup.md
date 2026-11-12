@@ -86,8 +86,10 @@ Codex CLI / ChatGPT デスクトップアプリの接続先を litellm gateway (
 
 - `model` / `model_reasoning_effort` 行は apply 時に既定値へリセットされる設計
   (codex 内での /model 選択は永続しない)。変更するなら modify テンプレート調整
-- opencode 側 (`mcps` = lapis-mcp) は本変更のスコープ外 (維持)。
-  `op://TOKEN/lapis-mcp-1/*`・`zai-api-key` アイテムは削除しない
+- opencode 側 (`private_dot_config/opencode`) は `litellm` provider に加え、 LiteLLM gateway の
+  リモート MCP server (server名 `litellm`, `{url}/mcp` + Bearer) も codex と同一要領で設定。
+  既存の `mcps` (= lapis-mcp) エントリと `op://TOKEN/lapis-mcp-1/*`・`zai-api-key`
+  アイテムは削除・変更しない
 - mimo 系 (`opencode-go/mimo-*`, mode: chat) も `/v1/responses` 経由で動作することを
   gateway ブリッジ対応後に確認済み (streaming 200)
 
