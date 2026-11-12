@@ -17,6 +17,8 @@
  * 注意: { onepasswordRead } は chezmoi テンプレート式 (適用時に展開される)。
  *       壊さないこと。
  **/
+{{- $litKey := onepasswordRead "op://TOKEN/litellm/credential" -}}
+{{- $litUrl := trimSuffix "/" (onepasswordRead "op://TOKEN/litellm/url") }}
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "orchestrator",
@@ -26,6 +28,36 @@
     "zai-coding-plan": {
       "settings": {
         "apiKey": "{{ onepasswordRead "op://TOKEN/zai-api-key/credential" }}"
+      }
+    },
+    // LiteLLM gateway (lapis-dev) — codex と同一の 1Password アイテム (vault TOKEN /
+    // item litellm) を使う。URL / API キーは chezmoi apply 時に onepasswordRead で
+    // 一度だけ解決し平文展開する (opencode 起動時に op を実行しない)。
+    // キーローテーション時は chezmoi apply の再実行が必要。
+    // 既定モデルにする場合は "model": "litellm/autorouter/agent" をトップレベルに置く。
+    "litellm": {
+      "name": "LiteLLM",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "{{ $litUrl }}/v1",
+        "apiKey": "{{ $litKey }}"
+      },
+      // モデル一覧は codex の gateway カタログ (private_dot_codex/models.json /
+      // scripts/gen-codex-model-catalog.py) と手動同期する。gateway 側の登録が
+      // 変わったら codex カタログの再生成に合わせてここも編集すること。
+      "models": {
+        "autorouter/agent": { "name": "Auto Router Agent", "limit": { "context": 262144 } },
+        "standard": { "name": "Standard", "limit": { "context": 1000000 } },
+        "complex": { "name": "Complex", "limit": { "context": 1000000 } },
+        "simple": { "name": "Simple", "limit": { "context": 262144 } },
+        "batch": { "name": "Batch", "limit": { "context": 922000 } },
+        "routing/zai/glm-5.3": { "name": "GLM 5.3", "limit": { "context": 1000000 } },
+        "routing/zai/glm-5.3-flash": { "name": "GLM 5.3 Flash", "limit": { "context": 1000000 } },
+        "iniad/gpt-6.1-sol": { "name": "GPT-6.1 Sol", "limit": { "context": 922000 } },
+        "iniad/gpt-6-luna": { "name": "GPT-6 Luna", "limit": { "context": 922000 } },
+        "iniad-claude/claude-sonnet-5-5": { "name": "Claude Sonnet 5.5", "limit": { "context": 1000000 } },
+        "mistral/deepseek-v4-1-flash-1017": { "name": "DeepSeek V4.1 Flash", "limit": { "context": 1048576 } },
+        "groq/gpt-oss-120b": { "name": "GPT-OSS 120B", "limit": { "context": 131072 } }
       }
     }
   },
