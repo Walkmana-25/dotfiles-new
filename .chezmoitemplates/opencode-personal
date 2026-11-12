@@ -73,6 +73,20 @@
           "Authorization": "Bearer {{ onepasswordRead "op://TOKEN/lapis-mcp-1/credential" }}"
         },
         "disabled": false
+      },
+      // LiteLLM gateway リモート MCP server (streamable HTTP, /mcp) — codex の
+      // [mcp_servers.mcps] と同一の URL / Bearer トークン (chezmoi apply 時に
+      // onepasswordRead で解決、opencode 起動時に op を実行しない)。
+      // 既存の "mcps" (lapis) との重複を避けるため server名は "litellm" を使用。
+      // 権限の mcps_* プレフィックスは "mcps" に付くため、この server の権限制御は
+      // 必要になったら agent .md 側の permissions で "litellm_*" を定義すること。
+      "litellm": {
+        "type": "remote",
+        "url": "{{ $litUrl }}/mcp",
+        "headers": {
+          "Authorization": "Bearer {{ $litKey }}"
+        },
+        "disabled": false
       }
     }
   },
