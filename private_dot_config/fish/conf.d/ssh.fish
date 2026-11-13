@@ -1,4 +1,4 @@
-setenv SSH_ENV $HOME/.ssh/environment
+set -gx SSH_ENV $HOME/.ssh/environment
 
 set -l __op_agent_sock ""
 if test -S "$HOME/.1password/agent.sock"
@@ -9,7 +9,7 @@ end
 
 function start_agent
     echo "Initializing new SSH agent ..."
-    ssh-agent -c | sed 's/^echo/#echo/' >$SSH_ENV
+    ssh-agent -c | sed -e 's/^echo/#echo/' -e 's/^setenv \([A-Z_]*\) \(.*\);/set -gx \1 \2/' >$SSH_ENV
     echo succeeded
     chmod 600 $SSH_ENV
     . $SSH_ENV >/dev/null
