@@ -1,8 +1,15 @@
-setenv SSH_ENV $HOME/.ssh/environment
+set -gx SSH_ENV $HOME/.ssh/environment
+
+set -l __op_agent_sock ""
+if test -S "$HOME/.1password/agent.sock"
+    set __op_agent_sock "$HOME/.1password/agent.sock"
+else if test -S "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    set __op_agent_sock "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+end
 
 function start_agent
     echo "Initializing new SSH agent ..."
-    ssh-agent -c | sed 's/^echo/#echo/' >$SSH_ENV
+    ssh-agent -c | sed -e 's/^echo/#echo/' -e 's/^setenv \([A-Z_]*\) \(.*\);/set -gx \1 \2/' >$SSH_ENV
     echo succeeded
     chmod 600 $SSH_ENV
     . $SSH_ENV >/dev/null
@@ -19,7 +26,9 @@ function test_identities
     end
 end
 
-if uname -a | grep -q WSL
+if test -n "$__op_agent_sock"
+    set -x SSH_AUTH_SOCK "$__op_agent_sock"
+else if uname -a | grep -q WSL
     set -x SSH_AUTH_SOCK $HOME/.ssh/agent.sock
     ss -a | grep -q $SSH_AUTH_SOCK
     if test $status -ne 0
