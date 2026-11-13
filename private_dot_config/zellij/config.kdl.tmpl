@@ -21,10 +21,24 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "locked"
         }
+        bind "Ctrl f" {
+            LaunchOrFocusPlugin "room" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+        }
         bind "Ctrl h" { GoToPreviousTab; }
         bind "Ctrl j" { GoToNextTab; }
         bind "Ctrl k" { GoToPreviousTab; }
         bind "Ctrl l" { GoToNextTab; }
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "forgot" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -275,7 +289,9 @@ plugins {
     filepicker location="zellij:strider" {
         cwd "/"
     }
+    forgot location="https://github.com/karimould/zellij-forgot/releases/latest/download/zellij_forgot.wasm"
     plugin-manager location="zellij:plugin-manager"
+    room location="https://github.com/rvcas/room/releases/latest/download/room.wasm"
     session-manager location="zellij:session-manager"
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
