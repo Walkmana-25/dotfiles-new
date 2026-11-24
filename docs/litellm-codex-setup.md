@@ -8,7 +8,7 @@ Codex CLI / ChatGPT デスクトップアプリの接続先を litellm gateway (
 
 - `~/.codex/config.toml` — chezmoi modify テンプレート
   (`.chezmoitemplates/codex-personal` / `codex-personal-modify`) が生成
-  - `model_provider = "litellm"` / `model = "zai/glm-5.3-flash"` / `model_reasoning_effort = "high"`
+  - `model_provider = "litellm"` / `model = "zai/glm-5.4"` / `model_reasoning_effort = "high"`
   - URL / credential は **chezmoi apply 時に** `onepasswordRead` で一度だけ解決し
     平文展開する (codex 起動時に 1Password CLI を実行しない)
   - `base_url = <1Password url>/v1`, `wire_api = "responses"`

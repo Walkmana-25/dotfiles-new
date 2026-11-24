@@ -49,7 +49,7 @@
 {{- /* 4. 接続先 slug の固定 (gateway 側の選択は codex が config に書込むため、apply 時に既定へ戻す) */ -}}
 {{- /* アプリが書き戻す小文字 "zai" も litellm へ正規化する */ -}}
 {{- $out = replaceAllRegex `(?m)^model_provider = "(?:ZAI|zai)"$` "model_provider = \"litellm\"" $out -}}
-{{- $out = replaceAllRegex `(?m)^model = ".*"$` "model = \"zai/glm-5.3-flash\"" $out -}}
+{{- $out = replaceAllRegex `(?m)^model = ".*"$` "model = \"zai/glm-5.4\"" $out -}}
 {{- $out = replaceAllRegex `(?m)^model_reasoning_effort = ".*"$` "model_reasoning_effort = \"high\"" $out -}}
 {{- $out = replaceAllRegex `(?m)^web_search = ".*"$` "web_search = \"live\"" $out -}}
 {{- if not (contains "web_search = " $out) -}}

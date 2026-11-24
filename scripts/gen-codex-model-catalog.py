@@ -262,13 +262,13 @@ def resolved_context(
 
 def reasoning(model_id: str):
     if "glm" in model_id:
-        default = "max" if model_id == "zai/glm-5.3" else "high"
+        default = "max" if model_id in {"zai/glm-5.3", "zai/glm-5.4"} else "high"
         return default, GLM_LEVELS
     return "medium", GENERIC_LEVELS
 
 
 def description(model_id: str, mode: str) -> str:
-    if model_id == "zai/glm-5.3":
+    if model_id in {"zai/glm-5.3", "zai/glm-5.4"}:
         return "Z.ai flagship GLM model (via LiteLLM gateway)"
     if model_id == "zai/glm-5.3-flash" or model_id == "glm-5.3-flash":
         return "Z.ai fast GLM model (via LiteLLM gateway)"
@@ -278,7 +278,7 @@ def description(model_id: str, mode: str) -> str:
 
 
 def priority(model_id: str) -> int:
-    if model_id == "zai/glm-5.3":
+    if model_id in {"zai/glm-5.3", "zai/glm-5.4"}:
         return 0
     if model_id == "zai/glm-5.3-flash":
         return 1
